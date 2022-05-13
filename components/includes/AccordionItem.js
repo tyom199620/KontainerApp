@@ -8,26 +8,32 @@ class AccordionItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: true
+            expanded: this.props.expanded || false
         }
     }
 
     setExpanded = val => this.setState({expanded: val});
 
     render() {
-        const {children, title} = this.props;
+        const {children, title, style, onPress, right, withoutBorder, titleStyle, titleTextStyle} = this.props;
         const {expanded} = this.state;
 
         return (
             <List.Accordion
                 title={title}
-                style={[styles.title, !expanded && styles.titleBorder]}
-                titleStyle={styles.titleText}
+                style={[styles.title, !expanded && !withoutBorder && styles.titleBorder, titleStyle]}
+                titleStyle={[styles.titleText, titleTextStyle]}
                 expanded={expanded}
-                onPress={() => this.setExpanded(!expanded)}
-                right={() => expanded ? <ImageArrowUp style={styles.arrow}/> : <ImageArrowDown style={styles.arrow}/>}
+                onPress={
+                    typeof onPress === 'function' ?
+                    onPress :
+                    () => this.setExpanded(!expanded)
+                }
+                right={() => right ? right : (
+                    expanded ? <ImageArrowUp /> : <ImageArrowDown />
+                )}
             >
-                <View style={styles.container}>
+                <View style={[styles.container, style]}>
                     {children}
                 </View>
             </List.Accordion>
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
         marginTop: 20
-    }
+    },
 });
 
 export default AccordionItem;

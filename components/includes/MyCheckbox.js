@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Checkbox } from 'react-native-paper';
-import {COLOR_1, COLOR_2, COLOR_6} from "../helpers/Variables";
-import CheckBox from 'expo-checkbox';
-import {StyleSheet} from "react-native";
+import {COLOR_1, COLOR_6} from "../helpers/Variables";
+import {StyleSheet, Text, View, TouchableOpacity} from "react-native";
+import {ImageOk} from "../helpers/images";
 
 class MyCheckbox extends React.Component {
     constructor(props) {
@@ -14,29 +13,50 @@ class MyCheckbox extends React.Component {
 
 
     render() {
-        const {checked} = this.state
+        const {checked} = this.state;
+        const {option, onPress} = this.props;
 
         return (
-            /*<Checkbox
-                status={checked ? 'checked' : 'unchecked'}
-                onPress={() => this.setState({checked: !checked})}
-                color={COLOR_2}
-                uncheckedColor={COLOR_6}
-            />*/
-            <CheckBox
-                value={checked}
-                onValueChange={val => this.setState({checked: val})}
-                style={styles.checkbox}
-            />
+            <TouchableOpacity
+                onPress={() => {
+                    this.setState({checked: !checked});
+                    onPress(option, !checked)
+                }}
+                activeOpacity={0.4}
+                style={styles.wrapper}
+            >
+                <View style={styles.checkbox} >
+                    {checked && <ImageOk style={styles.image} />}
+                </View>
+                <Text style={styles.label}>{option.key}</Text>
+            </TouchableOpacity>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    checkbox: {
-        backgroundColor: COLOR_6,
-        borderColor: COLOR_6
+    wrapper: {
+        paddingVertical: 8,
+        flexDirection: 'row',
+        alignItems: 'center'
     },
+    checkbox: {
+        width: 20,
+        height: 20,
+        borderRadius: 5,
+        backgroundColor: COLOR_6,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 20
+    },
+    image: {
+
+    },
+    label: {
+        fontFamily: 'GothamProMedium',
+        fontSize: 10,
+        color: COLOR_1
+    }
 });
 
 export default MyCheckbox;

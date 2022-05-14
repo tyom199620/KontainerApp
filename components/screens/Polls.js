@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {connect} from "react-redux";
 import {COLOR_1, COLOR_5, COLOR_6} from "../helpers/Variables";
@@ -29,12 +29,14 @@ class Polls extends React.Component {
 
                 {PollsList.map(poll => (
                     <AccordionItem
-                        style={styles.item}
                         key={new Date() + Math.random()}
-                        title={poll.title}
-
+                        headerStyle={styles.headerStyle}
+                        arrowStyle={styles.arrowStyle}
+                        titleComponent={<Text style={styles.header}>{poll.title}</Text>}
                     >
-                        <PollsItem optionsList={poll.options} />
+                        <View style={styles.itemWrapper}>
+                            <PollsItem optionsList={poll.options} />
+                        </View>
                     </AccordionItem>
                 ))}
             </Wrapper>
@@ -58,11 +60,22 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         lineHeight: 14
     },
-    item: {
-        backgroundColor: COLOR_5,
-        borderBottomWidth: 2,
-        borderBottomColor: COLOR_6,
+    header: {
+        fontSize: 12,
+        fontFamily: 'GothamProMedium',
+        color: COLOR_1
     },
+    headerStyle: {
+        paddingVertical: 18
+    },
+    arrowStyle: {
+        top: 20
+    },
+    itemWrapper: {
+        borderBottomColor: COLOR_6,
+        borderBottomWidth: 2,
+        paddingLeft: 20
+    }
 });
 
 const mapStateToProps = (store) => ({

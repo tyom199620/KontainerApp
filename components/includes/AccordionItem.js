@@ -1,7 +1,6 @@
 import React from 'react';
-import {StyleSheet, View} from "react-native";
-import {List} from "react-native-paper";
-import {COLOR_1, COLOR_5, COLOR_6} from "../helpers/Variables";
+import {StyleSheet, TouchableOpacity, View} from "react-native";
+import {COLOR_6} from "../helpers/Variables";
 import {ImageArrowDown, ImageArrowUp} from "../helpers/images";
 
 class AccordionItem extends React.Component {
@@ -15,56 +14,57 @@ class AccordionItem extends React.Component {
     setExpanded = val => this.setState({expanded: val});
 
     render() {
-        const {children, title, style, onPress, right, withoutBorder, titleStyle, titleTextStyle} = this.props;
+        const {
+            children,
+            titleComponent,
+            onPress,
+            arrowComponent,
+            wrapperStyle,
+            headerStyle,
+            arrowStyle,
+            childrenStyle
+        } = this.props;
         const {expanded} = this.state;
 
         return (
-            <List.Accordion
-                title={title}
-                style={[styles.title, !expanded && !withoutBorder && styles.titleBorder, titleStyle]}
-                titleStyle={[styles.titleText, titleTextStyle]}
-                expanded={expanded}
-                onPress={
-                    typeof onPress === 'function' ?
-                    onPress :
-                    () => this.setExpanded(!expanded)
-                }
-                right={() => right ? right : (
-                    expanded ? <ImageArrowUp /> : <ImageArrowDown />
-                )}
-            >
-                <View style={[styles.container, style]}>
-                    {children}
-                </View>
-            </List.Accordion>
+            <View style={[styles.wrapper, wrapperStyle]}>
+                <TouchableOpacity
+                    style={[styles.header, !expanded && styles.headerBorder, headerStyle]}
+                    onPress={
+                        typeof onPress === 'function' ?
+                            onPress :
+                            () => this.setExpanded(!expanded)
+                    }
+                    activeOpacity={0.5}
+                >
+                    {titleComponent}
+                    <View style={[styles.arrowView, arrowStyle]}>
+                        {arrowComponent ? arrowComponent : (
+                            expanded ? <ImageArrowUp /> : <ImageArrowDown />
+                        )}
+                    </View>
+                </TouchableOpacity>
+                {expanded && <View style={[styles.children, childrenStyle]}>{children}</View>}
+            </View>
         )
-
     }
 }
 
 const styles = StyleSheet.create({
-    title: {
-        backgroundColor: COLOR_5,
+    wrapper: {},
+    header: {
     },
-    titleBorder: {
+    headerBorder: {
         borderBottomWidth: 2,
         borderBottomColor: COLOR_6
     },
-    titleText: {
-        color: COLOR_1,
-        fontFamily: 'GothamProMedium',
-        fontSize: 12,
-        marginLeft: -14
+    arrowView: {
+        position: 'absolute',
+        right: 8,
     },
-    arrow: {
-        height: 14,
-        width: 14,
-        resizeMode: 'contain'
-    },
-    container: {
-        paddingHorizontal: 20,
-        marginTop: 20
-    },
+    children: {
+        marginTop: 20,
+    }
 });
 
 export default AccordionItem;

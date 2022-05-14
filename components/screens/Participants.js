@@ -68,18 +68,24 @@ class Participants extends React.Component {
                     companyName={'Company Name'}
                     city={'Russia, Moscow'}
                     doingProfile={'operator KP'}
+                    navigation={navigation}
+                    id={Math.random()}
                 />
                 <ParticipantItem
                     imageUri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
                     companyName={'Company Name'}
                     city={'Russia, Moscow'}
                     doingProfile={'operator KP'}
+                    navigation={navigation}
+                    id={Math.random()}
                 />
                 <ParticipantItem
                     imageUri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
                     companyName={'Company Name'}
                     city={'Russia, Moscow'}
                     doingProfile={'operator KP'}
+                    navigation={navigation}
+                    id={Math.random()}
                 />
             </Wrapper>
         );

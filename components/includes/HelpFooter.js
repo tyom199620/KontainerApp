@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
         paddingTop: 40,
         paddingBottom: 60,
         paddingHorizontal: WRAPPER_PADDINGS,
-        marginTop: -10
     },
     title: {
         fontSize: 12,

@@ -5,7 +5,7 @@ import {List} from 'react-native-paper';
 import Questions from "../../assets/data/questions";
 import HelpFooter from "../includes/HelpFooter";
 import AccordionItem from "../includes/AccordionItem";
-import {COLOR_5, COLOR_6} from "../helpers/Variables";
+import {COLOR_1, COLOR_5, COLOR_6} from "../helpers/Variables";
 import {ImageArrowRight} from "../helpers/images";
 
 class Help extends React.Component {
@@ -23,45 +23,53 @@ class Help extends React.Component {
                 }}
                 footer={<HelpFooter />}
             >
-                <List.Section>
-
-                    {Questions.map(question => (
-                        <AccordionItem
-                            style={styles.item}
-                            key={new Date() + Math.random()}
-                            title={question.title}
-                        >
-                            <Text style={styles.text}>{question.question}</Text>
-                        </AccordionItem>
-                    ))}
-
+                {Questions.map(question => (
                     <AccordionItem
-                        title={'Пользовательское соглашение'}
-                        onPress={() => {}}
-                        right={<ImageArrowRight style={styles.arrowRight} />}
-                    />
+                        key={new Date() + Math.random()}
+                        headerStyle={styles.headerStyle}
+                        arrowStyle={styles.arrowStyle}
+                        titleComponent={<Text style={styles.header}>{question.title}</Text>}
+                    >
+                        <Text style={styles.text}>{question.question}</Text>
+                    </AccordionItem>
+                ))}
 
-                </List.Section>
+                <AccordionItem
+                    wrapperStyle={styles.wrapperStyle}
+                    headerStyle={{...styles.headerStyle, borderBottomWidth: 0}}
+                    arrowStyle={styles.arrowStyle}
+                    arrowComponent={<ImageArrowRight style={styles.arrowRight} />}
+                    titleComponent={<Text style={styles.header}>Пользовательское соглашение</Text>}
+                    onPress={() => {}}
+                 />
             </Wrapper>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    item: {
-        backgroundColor: COLOR_5,
-        borderBottomWidth: 2,
-        borderBottomColor: COLOR_6,
-    },
     text: {
         fontSize: 11,
         fontFamily: 'GothamProRegular',
         lineHeight: 14,
-        marginTop: -20,
-        marginBottom: 20
+        paddingLeft: 20,
+        borderBottomWidth: 2,
+        borderBottomColor: COLOR_6,
+        paddingBottom: 20
     },
     arrowRight: {
         marginRight: 3
+    },
+    header: {
+        fontSize: 12,
+        fontFamily: 'GothamProMedium',
+        color: COLOR_1
+    },
+    headerStyle: {
+        paddingVertical: 18
+    },
+    arrowStyle: {
+        top: 20
     }
 });
 

@@ -36,3 +36,11 @@ export {default as ImageSearch} from '../../assets/images/search.svg';
 export {default as ImageFilter} from '../../assets/images/filter.svg';
 export {default as ImageArrowSmall} from '../../assets/images/nextSmall.svg';
 export {default as ImageArrowSmallUp} from '../../assets/images/nextSmallUp.svg';
+
+export {default as ImageRatings} from '../../assets/images/ratings.png';
+export {default as ImageRating} from '../../assets/images/rating.svg';
+export {default as ImageOkSmall} from '../../assets/images/ok_small.svg';
+export {default as ImageCallGreen} from '../../assets/images/call_green.svg';
+export {default as ImageEmailGreen} from '../../assets/images/email_green.svg';
+export {default as ImageMapPlaceholder} from '../../assets/images/placeholder.svg';
+export {default as ImageMouseCursor} from '../../assets/images/web.svg';

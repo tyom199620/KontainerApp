@@ -38,6 +38,7 @@ class Wrapper extends React.Component {
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
+        flexGrow: 1,
         backgroundColor: '#fff'
     },
     container: {

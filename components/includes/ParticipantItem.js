@@ -5,9 +5,13 @@ import {COLOR_1} from "../helpers/Variables";
 
 class ParticipantItem extends Component {
     render() {
-        const {imageUri, companyName, city, doingProfile} = this.props;
+        const {imageUri, companyName, city, doingProfile, navigation, id} = this.props;
         return (
-            <View style={styles.wrapper}>
+            <TouchableOpacity
+                style={styles.wrapper}
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('SingleParticipant', {currentPage: 'Страница участника', id})}
+            >
                 <View style={styles.leftPart}>
                     <Image
                         source={{uri: imageUri}}
@@ -22,7 +26,7 @@ class ParticipantItem extends Component {
                 <TouchableOpacity styles={styles.favImgBlock}>
                     <ImageFavorite styles={styles.favImg} />
                 </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
         );
     }
 }
@@ -32,7 +36,8 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingRight: 10
     },
     leftPart: {
         flexDirection: 'row'
@@ -44,6 +49,7 @@ const styles = StyleSheet.create({
         marginRight: 26
     },
     info: {
+        paddingVertical: 10,
         justifyContent: 'space-evenly',
     },
     name: {
@@ -62,9 +68,8 @@ const styles = StyleSheet.create({
         color: COLOR_1
     },
     favImgBlock: {
-        alignSelf: 'flex-end',
-        alignItems: 'center',
-        justifyContent: 'center'
+    },
+    favImg: {
     }
 })
 

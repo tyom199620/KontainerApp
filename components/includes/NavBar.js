@@ -9,7 +9,7 @@ class NavBar extends Component {
             <View style={styles.wrapper}>
                 {tabs.map(tab => (
                     <TouchableOpacity
-                        activeOpacity={0.7}
+                        activeOpacity={0.3}
                         style={styles.block}
                         onPress={() => onPress(tab)}
                         key={tab}

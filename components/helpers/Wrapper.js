@@ -8,27 +8,45 @@ import Container from "./Container";
 
 class Wrapper extends React.Component {
     render() {
-        const {children, withImage, header, withContainer, footer} = this.props;
+        const {children, withImage, header, withContainer, footer, withoutScrollView} = this.props;
 
         return (
             <SafeAreaView style={styles.wrapper}>
 
                 {withImage && <ImageBackGround style={styles.backgroundImage} width={Dimensions.get('window').width}/>}
 
-                <ScrollView keyboardShouldPersistTaps='handled'>
-                    <View style={styles.container}>
+                {withoutScrollView ? (
+                    <View keyboardShouldPersistTaps='handled'>
+                        <View style={styles.container}>
 
-                        {header && <Header{...header} />}
+                            {header && <Header{...header} />}
 
-                        {withContainer ? (
-                            <Container>
-                                {children}
-                            </Container>
-                        ) : children}
+                            {withContainer ? (
+                                <Container>
+                                    {children}
+                                </Container>
+                            ) : children}
 
+                        </View>
+                        {footer ? footer : null}
                     </View>
-                    {footer ? footer : null}
-                </ScrollView>
+                ) : (
+                    <ScrollView keyboardShouldPersistTaps='handled' showsVerticalScrollIndicator ={false}>
+                        <View style={styles.container}>
+
+                            {header && <Header{...header} />}
+
+                            {withContainer ? (
+                                <Container>
+                                    {children}
+                                </Container>
+                            ) : children}
+
+                        </View>
+                        {footer ? footer : null}
+                    </ScrollView>
+                )}
+
 
             </SafeAreaView>
         );

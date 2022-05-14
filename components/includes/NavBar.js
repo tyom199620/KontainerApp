@@ -1,32 +1,72 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
-import {COLOR_1, COLOR_2} from "../helpers/Variables";
+import {StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions} from "react-native";
+import {COLOR_1, COLOR_11, COLOR_2, WRAPPER_PADDINGS} from "../helpers/Variables";
 
 class NavBar extends Component {
+    constructor(props) {
+        super(props);
+        this.ScrollView = React.createRef();
+    }
+
+
+    convertTabs = (tabs, activeTab) => {
+        tabs = tabs.slice(1).filter(tab => tab !== activeTab);
+        tabs.unshift(activeTab);
+        return tabs
+    }
+
+    scrollToStart(){
+        this.ScrollView.scrollTo({x: 0});
+    }
+
+
     render() {
-        const {tabs, activeTab, onPress} = this.props;
+        let {tabs, activeTab, onPress, secondary} = this.props;
+        //if (secondary) tabs = this.convertTabs(tabs, activeTab);
+
         return (
-            <View style={styles.wrapper}>
-                {tabs.map(tab => (
-                    <TouchableOpacity
-                        activeOpacity={0.3}
-                        style={styles.block}
-                        onPress={() => onPress(tab)}
-                        key={tab}
-                    >
-                        <Text style={styles.text}>{tab}</Text>
-                        {activeTab === tab && <View style={styles.line}/>}
-                    </TouchableOpacity>
-                ))}
+            <View style={styles.container}>
+                <ScrollView
+                    style={secondary && styles.secondaryWrapper}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    ref={ref => (this.ScrollView = ref)}
+                >
+                    {tabs.map(tab => (
+                        <TouchableOpacity
+                            activeOpacity={0.3}
+                            style={styles.block}
+                            onPress={() => {
+                                onPress(tab)
+                                //if (secondary) this.scrollToStart();
+                            }}
+                            key={tab}
+                        >
+                            <Text style={[styles.text, secondary && (activeTab !== tab ? styles.secondaryText : styles.secondaryActiveText)]}>{tab}</Text>
+                            {activeTab === tab && <View style={styles.line}/>}
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    wrapper: {
-        flexDirection: 'row',
-        marginTop: 20
+    container: {
+        marginVertical: 20,
+        height: 30
+    },
+    secondaryWrapper: {
+        backgroundColor: COLOR_11,
+        paddingTop: 20,
+        paddingBottom: 14,
+        position: 'absolute',
+        width: Dimensions.get('window').width,
+        left: -WRAPPER_PADDINGS,
+        zIndex: 1,
+        paddingLeft: WRAPPER_PADDINGS,
+        bottom: 0
     },
     block: {
         marginRight: 30
@@ -42,6 +82,15 @@ const styles = StyleSheet.create({
         height: 3,
         borderRadius: 4,
         backgroundColor: COLOR_2
+    },
+    secondaryText: {
+        fontFamily: 'GothamProRegular',
+        fontSize: 10,
+        color: COLOR_1,
+        marginBottom: 7
+    },
+    secondaryActiveText: {
+        fontSize: 10
     }
 });
 

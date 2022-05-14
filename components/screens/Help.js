@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text} from "react-native";
 import Wrapper from "../helpers/Wrapper";
-import {List} from 'react-native-paper';
 import Questions from "../../assets/data/questions";
 import HelpFooter from "../includes/HelpFooter";
 import AccordionItem from "../includes/AccordionItem";
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
         fontFamily: 'GothamProRegular',
         lineHeight: 14,
         paddingLeft: 20,
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderBottomColor: COLOR_6,
         paddingBottom: 20
     },

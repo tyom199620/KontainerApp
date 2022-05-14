@@ -65,7 +65,7 @@ class MyProfile extends React.Component {
 
         const {currentPage} = route.params;
         return (
-            <Wrapper withContainer header={{
+            <Wrapper withScrollView withContainer header={{
                 currentPage,
                 home: false,
                 navigation,

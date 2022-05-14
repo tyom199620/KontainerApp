@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
-import {WRAPPER_PADDINGS} from "../helpers/Variables";
+import {COLOR_1, WRAPPER_PADDINGS} from "../helpers/Variables";
 import {ImageBackArrow, ImageHomeIcon, ImageNotificationsIcon, ImageSave} from "../helpers/images";
 
 class Header extends React.Component {
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     currentPage: {
         fontFamily: 'GothamProRegular',
         fontSize: 14,
+        color: COLOR_1
     },
     leftPart: {
         flexDirection: 'row',

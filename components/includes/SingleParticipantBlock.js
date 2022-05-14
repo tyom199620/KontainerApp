@@ -4,9 +4,9 @@ import MyButton from "./MyButton";
 
 class SingleParticipantBlock extends Component {
     render() {
-        const {uri, children, button} = this.props;
+        const {uri, children, button, style} = this.props;
         return (
-            <View style={styles.wrapper}>
+            <View style={[styles.wrapper, style]}>
                 <View style={styles.row}>
                     <View style={styles.imageBlock}>
                         <Image source={{uri}} style={styles.image} />

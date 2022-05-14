@@ -44,3 +44,13 @@ export {default as ImageCallGreen} from '../../assets/images/call_green.svg';
 export {default as ImageEmailGreen} from '../../assets/images/email_green.svg';
 export {default as ImageMapPlaceholder} from '../../assets/images/placeholder.svg';
 export {default as ImageMouseCursor} from '../../assets/images/web.svg';
+
+export {default as ImageNextArrow} from '../../assets/images/back1.svg';
+export {default as ImageBiggerPlaceholder} from '../../assets/images/bigger_placeholder.svg';
+export {default as ImageCalendar} from '../../assets/images/calendar.svg';
+export {default as ImageLike} from '../../assets/images/like.svg';
+export {default as ImageLikeBlue} from '../../assets/images/like1.svg';
+
+export {default as ImageOffersArrow} from '../../assets/images/offers_arrow.svg';
+export {default as ImageRatingSmall} from '../../assets/images/rating_small.svg';
+export {default as ImageSend} from '../../assets/images/send.svg';

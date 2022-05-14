@@ -11,6 +11,7 @@ import Offers from "../components/screens/Offers";
 import Participants from "../components/screens/Participants";
 import Polls from "../components/screens/Polls";
 import SingleParticipant from "../components/screens/SingleParticipant";
+import SendOffer from "../components/screens/SendOffer";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ class MainNavigation extends React.Component {
                     <Stack.Screen name="Participants" component={Participants}/>
                     <Stack.Screen name="Polls" component={Polls}/>
                     <Stack.Screen name="SingleParticipant" component={SingleParticipant}/>
+                    <Stack.Screen name="SendOffer" component={SendOffer}/>
                 </Stack.Navigator>
             </NavigationContainer>
         )

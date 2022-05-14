@@ -15,3 +15,4 @@ export const COLOR_7 = '#CCCCCC';
 export const COLOR_8 = '#111111';
 export const COLOR_9 = '#666666';
 export const COLOR_10 = '#F2F2F2';
+export const COLOR_11 = '#EAF7FF';

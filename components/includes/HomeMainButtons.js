@@ -10,10 +10,10 @@ class HomeMainButtons extends React.Component {
         const {navigation} = this.props;
         return (
             <View style={styles.wrapper}>
-                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Events', {currentPage: 'Мероприятия'})}
+                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Events', {currentPage: 'Мероприятие'})}
                                   style={[styles.block, styles.borderTopLeft, styles.bgBlue]}>
                     <ImageEvents style={styles.image}/>
-                    <Text style={styles.text}>Мероприятия</Text>
+                    <Text style={styles.text}>Мероприятие</Text>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Participants', {currentPage: 'Участники'})}
                                   style={[styles.block, styles.bgGreen]}>

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     header: {
     },
     headerBorder: {
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderBottomColor: COLOR_6
     },
     arrowView: {

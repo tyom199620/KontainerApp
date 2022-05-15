@@ -8,7 +8,7 @@ import Container from "./Container";
 
 class Wrapper extends React.Component {
     render() {
-        const {children, withImage, header, withContainer, footer, withoutScrollView} = this.props;
+        const {children, withImage, header, withContainer, footer, withoutScrollView,  withPaddings} = this.props;
 
         return (
             <SafeAreaView style={styles.wrapper}>
@@ -17,7 +17,7 @@ class Wrapper extends React.Component {
 
                 {withoutScrollView ? (
                     <View keyboardShouldPersistTaps='handled'>
-                        <View style={styles.container}>
+                        <View style={withPaddings && styles.container}>
 
                             {header && <Header{...header} />}
 
@@ -31,20 +31,22 @@ class Wrapper extends React.Component {
                         {footer ? footer : null}
                     </View>
                 ) : (
-                    <ScrollView keyboardShouldPersistTaps='handled' showsVerticalScrollIndicator ={false}>
-                        <View style={styles.container}>
+                    <>
+                        {header && <Header{...header} />}
+                        <ScrollView keyboardShouldPersistTaps='handled' showsVerticalScrollIndicator ={false}>
+                            <View style={withPaddings && styles.container}>
 
-                            {header && <Header{...header} />}
+                                {withContainer ? (
+                                    <Container>
+                                        {children}
+                                    </Container>
+                                ) : children}
 
-                            {withContainer ? (
-                                <Container>
-                                    {children}
-                                </Container>
-                            ) : children}
+                            </View>
+                            {footer ? footer : null}
+                        </ScrollView>
+                    </>
 
-                        </View>
-                        {footer ? footer : null}
-                    </ScrollView>
                 )}
 
 

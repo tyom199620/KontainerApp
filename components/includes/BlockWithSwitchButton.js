@@ -5,7 +5,7 @@ import ToggleSwitch from 'toggle-switch-react-native'
 
 class BlockWithSwitchButton extends Component {
     render() {
-        const {title, description, isButton = true, titleStyle, style, isOn, onToggle} = this.props;
+        const {title, description, isButton = true, titleStyle, style, isOn, onToggle, descriptionStyle} = this.props;
         return (
             <View style={[styles.wrapper, style]}>
                 <View style={styles.upRow}>
@@ -22,7 +22,7 @@ class BlockWithSwitchButton extends Component {
                     )}
                 </View>
                 {description && (
-                    <Text style={styles.description}>{description}</Text>
+                    <Text style={[styles.description, descriptionStyle]}>{description}</Text>
                 )}
             </View>
 

@@ -7,6 +7,7 @@ import Search from "../includes/Search";
 import {ImageFilter} from "../helpers/images";
 import FilterItem from "../includes/FilterItem";
 import ParticipantItem from "../includes/ParticipantItem";
+import {WRAPPER_PADDINGS} from "../helpers/Variables";
 
 class Participants extends React.Component {
     constructor(props) {
@@ -36,57 +37,59 @@ class Participants extends React.Component {
                     tabs={tabs}
                     activeTab={activeTab}
                 />
-                <View style={styles.searchRow}>
-                    <Search
-                        style={styles.search}
-                        value={searchValue}
-                        onChangeText={val => this.setState({searchValue: val})}
-                    />
-                    <TouchableOpacity
-                        activeOpacity={0.2}
-                        onPress={() => this.setState({showFilters: !showFilters})}
-                    >
-                        <ImageFilter />
-                    </TouchableOpacity>
-                </View>
-                {showFilters && (
-                    <View style={styles.filtersRow}>
-                        <FilterItem
-                            title={'Профиль деятельности'}
-                            options={[1982374, 23987462893, 28394789, 28368932]}
-                            onSelect={option => this.setState({doingProfile: option})}
+                <View style={styles.wrapper}>
+                    <View style={styles.searchRow}>
+                        <Search
+                            style={styles.search}
+                            value={searchValue}
+                            onChangeText={val => this.setState({searchValue: val})}
                         />
-                        <FilterItem
-                            title={'Город'}
-                            options={[1982374, 23987462893, 28394789, 28368932]}
-                            onSelect={option => this.setState({city: option})}
-                        />
+                        <TouchableOpacity
+                            activeOpacity={0.2}
+                            onPress={() => this.setState({showFilters: !showFilters})}
+                        >
+                            <ImageFilter />
+                        </TouchableOpacity>
                     </View>
-                )}
-                <ParticipantItem
-                    imageUri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
-                    companyName={'Company Name'}
-                    city={'Russia, Moscow'}
-                    doingProfile={'operator KP'}
-                    navigation={navigation}
-                    id={Math.random()}
-                />
-                <ParticipantItem
-                    imageUri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
-                    companyName={'Company Name'}
-                    city={'Russia, Moscow'}
-                    doingProfile={'operator KP'}
-                    navigation={navigation}
-                    id={Math.random()}
-                />
-                <ParticipantItem
-                    imageUri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
-                    companyName={'Company Name'}
-                    city={'Russia, Moscow'}
-                    doingProfile={'operator KP'}
-                    navigation={navigation}
-                    id={Math.random()}
-                />
+                    {showFilters && (
+                        <View style={styles.filtersRow}>
+                            <FilterItem
+                                title={'Профиль деятельности'}
+                                options={[1982374, 23987462893, 28394789, 28368932]}
+                                onSelect={option => this.setState({doingProfile: option})}
+                            />
+                            <FilterItem
+                                title={'Город'}
+                                options={[1982374, 23987462893, 28394789, 28368932]}
+                                onSelect={option => this.setState({city: option})}
+                            />
+                        </View>
+                    )}
+                    <ParticipantItem
+                        imageUri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
+                        companyName={'Company Name'}
+                        city={'Russia, Moscow'}
+                        doingProfile={'operator KP'}
+                        navigation={navigation}
+                        id={Math.random()}
+                    />
+                    <ParticipantItem
+                        imageUri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
+                        companyName={'Company Name'}
+                        city={'Russia, Moscow'}
+                        doingProfile={'operator KP'}
+                        navigation={navigation}
+                        id={Math.random()}
+                    />
+                    <ParticipantItem
+                        imageUri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
+                        companyName={'Company Name'}
+                        city={'Russia, Moscow'}
+                        doingProfile={'operator KP'}
+                        navigation={navigation}
+                        id={Math.random()}
+                    />
+                </View>
             </Wrapper>
         );
     }
@@ -94,10 +97,14 @@ class Participants extends React.Component {
 
 
 const styles = StyleSheet.create({
+    wrapper: {
+        paddingHorizontal: WRAPPER_PADDINGS
+    },
     searchRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: -20
     },
     search: {
         width: '90%'

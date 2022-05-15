@@ -11,7 +11,7 @@ import {
     ImageOkSmall,
     ImageRating
 } from "../helpers/images";
-import {COLOR_1, COLOR_6} from "../helpers/Variables";
+import {COLOR_1, COLOR_6, WRAPPER_PADDINGS} from "../helpers/Variables";
 import MyButton from "../includes/MyButton";
 import ReviewItem from "../includes/ReviewItem";
 
@@ -33,66 +33,100 @@ class SingleParticipant extends React.Component {
                 home: true,
                 navigation
             }}>
-                <Text style={styles.header}>Основные данные</Text>
-                <SingleParticipantBlock
-                    uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
-                >
-                    <View style={styles.coWorked}>
-                        <ImageOkSmall />
-                        <Text style={styles.coWorkedText}>Сотрудничали</Text>
-                    </View>
-                    <Text style={styles.companyName}>CompanyName</Text>
-                    <Text style={styles.additionalInfo}>Россия, Новосибирск</Text>
-                    <Text style={styles.additionalInfo}>ИНН 5300000040 / ОГРН 0000000000001</Text>
-                    <Text style={styles.additionalInfo}>Вид налогообложения: УСН</Text>
-                    <Text style={styles.jobInfo}>оператор КП</Text>
-                    <View style={styles.contactLine}>
-                        <ImageMapPlaceholder />
-                        <Text style={styles.contactInfo}>г. Новосибирск, ул. Транспортая, д.4, ст. 12</Text>
-                    </View>
-                    <View style={styles.contactLine}>
-                        <ImageMouseCursor />
-                        <Text style={styles.contactInfo}>www.company.com</Text>
-                    </View>
-                </SingleParticipantBlock>
+                <View style={styles.wrapper}>
+                    <Text style={styles.header}>Основные данные</Text>
+                    <SingleParticipantBlock
+                        uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
+                    >
+                        <View style={styles.coWorked}>
+                            <ImageOkSmall />
+                            <Text style={styles.coWorkedText}>Сотрудничали</Text>
+                        </View>
+                        <Text style={styles.companyName}>CompanyName</Text>
+                        <Text style={styles.additionalInfo}>Россия, Новосибирск</Text>
+                        <Text style={styles.additionalInfo}>ИНН 5300000040 / ОГРН 0000000000001</Text>
+                        <Text style={styles.additionalInfo}>Вид налогообложения: УСН</Text>
+                        <Text style={styles.jobInfo}>оператор КП</Text>
+                        <View style={styles.contactLine}>
+                            <ImageMapPlaceholder />
+                            <Text style={styles.contactInfo}>г. Новосибирск, ул. Транспортая, д.4, ст. 12</Text>
+                        </View>
+                        <View style={styles.contactLine}>
+                            <ImageMouseCursor />
+                            <Text style={styles.contactInfo}>www.company.com</Text>
+                        </View>
+                    </SingleParticipantBlock>
 
-                <Text style={styles.header}>Контакты</Text>
-                <SingleParticipantBlock
-                    uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
-                    button={{
-                        label: 'Написать',
-                        onPress: () => {}
-                    }}
-                >
-                    <Text style={styles.name}>Иванов Пётр Сергеевич</Text>
-                    <Text style={styles.location}>Россия, Новосибирск</Text>
-                    <View style={styles.contacts}>
-                        <Text style={styles.contactsText}>+7 913 320 0001</Text>
-                        <ImageCallGreen />
-                    </View>
-                    <View style={styles.contacts}>
-                        <Text style={styles.contactsText}>petrivanov@company.com</Text>
-                        <ImageEmailGreen />
-                    </View>
-                </SingleParticipantBlock>
+                    <Text style={styles.header}>Контакты</Text>
+                    <SingleParticipantBlock
+                        uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
+                        button={{
+                            label: 'Написать',
+                            onPress: () => {}
+                        }}
+                    >
+                        <Text style={styles.name}>Иванов Пётр Сергеевич</Text>
+                        <Text style={styles.location}>Россия, Новосибирск</Text>
+                        <View style={styles.contacts}>
+                            <Text style={styles.contactsText}>+7 913 320 0001</Text>
+                            <ImageCallGreen />
+                        </View>
+                        <View style={styles.contacts}>
+                            <Text style={styles.contactsText}>petrivanov@company.com</Text>
+                            <ImageEmailGreen />
+                        </View>
+                    </SingleParticipantBlock>
 
-                <View style={styles.reviewBlock}>
-                    <Text style={styles.header}>Отзывы на участника</Text>
-                    <View style={styles.reviewLine}>
-                        <ImageRating />
-                        <View style={styles.reviewDescription}>
-                            <Text style={styles.averageReview}>Общий рейтинг — 4,5</Text>
-                            <Text style={styles.reviewInfo}>(основан на 339 отзывах)</Text>
+                    <View style={styles.reviewBlock}>
+                        <Text style={styles.header}>Отзывы на участника</Text>
+                        <View style={styles.reviewLine}>
+                            <ImageRating />
+                            <View style={styles.reviewDescription}>
+                                <Text style={styles.averageReview}>Общий рейтинг — 4,5</Text>
+                                <Text style={styles.reviewInfo}>(основан на 339 отзывах)</Text>
+                            </View>
+                        </View>
+                        <ReviewItem toOrFrom={'от'} review={{
+                            uri: 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
+                            name: 'ЖелДорИнвест',
+                            date: '14.03.2022',
+                            text: 'Идейные соображения высшего порядка, а также укрепление и развитие структуры способствует подготовки и реализации системы обучения кадров.',
+                            rating: 1.5
+                        }} />
+                        <ReviewItem toOrFrom={'от'} review={{
+                            uri: 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
+                            name: 'ЖелДорИнвест',
+                            date: '14.03.2022',
+                            text: 'Идейные соображения высшего порядка, а также укрепление и развитие структуры способствует подготовки и реализации системы обучения кадров.',
+                            rating: 4
+                        }} />
+                        <View style={styles.buttonRow}>
+                            <MyButton
+                                textStyle={styles.buttonText}
+                                style={styles.button}
+                                onPress={this.leaveReview}
+                            >
+                                Оставить отзыв
+                            </MyButton>
+                            <MyButton
+                                textStyle={styles.buttonText}
+                                style={styles.button}
+                                onPress={this.moreReviews}
+                            >
+                                Ещё отзывы
+                            </MyButton>
                         </View>
                     </View>
-                    <ReviewItem toOrFrom={'от'} review={{
+
+                    <Text style={styles.header}>Отзывы участника</Text>
+                    <ReviewItem toOrFrom={'на'} review={{
                         uri: 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
                         name: 'ЖелДорИнвест',
                         date: '14.03.2022',
                         text: 'Идейные соображения высшего порядка, а также укрепление и развитие структуры способствует подготовки и реализации системы обучения кадров.',
                         rating: 1.5
                     }} />
-                    <ReviewItem toOrFrom={'от'} review={{
+                    <ReviewItem toOrFrom={'на'} review={{
                         uri: 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
                         name: 'ЖелДорИнвест',
                         date: '14.03.2022',
@@ -103,13 +137,6 @@ class SingleParticipant extends React.Component {
                         <MyButton
                             textStyle={styles.buttonText}
                             style={styles.button}
-                            onPress={this.leaveReview}
-                        >
-                            Оставить отзыв
-                        </MyButton>
-                        <MyButton
-                            textStyle={styles.buttonText}
-                            style={styles.button}
                             onPress={this.moreReviews}
                         >
                             Ещё отзывы
@@ -117,30 +144,6 @@ class SingleParticipant extends React.Component {
                     </View>
                 </View>
 
-                <Text style={styles.header}>Отзывы участника</Text>
-                <ReviewItem toOrFrom={'на'} review={{
-                    uri: 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
-                    name: 'ЖелДорИнвест',
-                    date: '14.03.2022',
-                    text: 'Идейные соображения высшего порядка, а также укрепление и развитие структуры способствует подготовки и реализации системы обучения кадров.',
-                    rating: 1.5
-                }} />
-                <ReviewItem toOrFrom={'на'} review={{
-                    uri: 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
-                    name: 'ЖелДорИнвест',
-                    date: '14.03.2022',
-                    text: 'Идейные соображения высшего порядка, а также укрепление и развитие структуры способствует подготовки и реализации системы обучения кадров.',
-                    rating: 4
-                }} />
-                <View style={styles.buttonRow}>
-                    <MyButton
-                        textStyle={styles.buttonText}
-                        style={styles.button}
-                        onPress={this.moreReviews}
-                    >
-                        Ещё отзывы
-                    </MyButton>
-                </View>
 
             </Wrapper>
         );
@@ -149,6 +152,9 @@ class SingleParticipant extends React.Component {
 
 
 const styles = StyleSheet.create({
+    wrapper: {
+        paddingHorizontal: WRAPPER_PADDINGS
+    },
     block: {
         marginBottom: 50
     },

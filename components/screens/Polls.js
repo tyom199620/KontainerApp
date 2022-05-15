@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {connect} from "react-redux";
-import {COLOR_1, COLOR_5, COLOR_6} from "../helpers/Variables";
+import {COLOR_1, COLOR_5, COLOR_6, WRAPPER_PADDINGS} from "../helpers/Variables";
 import PollsList from "../../assets/data/polls";
 import AccordionItem from "../includes/AccordionItem";
 import PollsItem from "../includes/PollsItem";
@@ -22,23 +22,25 @@ class Polls extends React.Component {
                 home: true,
                 navigation
             }}>
-                <Text style={styles.title}>Уважаемый пользователь!</Text>
-                <Text style={styles.description}>Просим принять участие в исследовании общественного мнения участников
-                    рынка контейнерных перевозок и ответить на несколько профессиональных вопросов. Ваше мнение важно
-                    для нас!</Text>
+                <View style={styles.wrapper}>
+                    <Text style={styles.title}>Уважаемый пользователь!</Text>
+                    <Text style={styles.description}>Просим принять участие в исследовании общественного мнения участников
+                        рынка контейнерных перевозок и ответить на несколько профессиональных вопросов. Ваше мнение важно
+                        для нас!</Text>
 
-                {PollsList.map(poll => (
-                    <AccordionItem
-                        key={new Date() + Math.random()}
-                        headerStyle={styles.headerStyle}
-                        arrowStyle={styles.arrowStyle}
-                        titleComponent={<Text style={styles.header}>{poll.title}</Text>}
-                    >
-                        <View style={styles.itemWrapper}>
-                            <PollsItem optionsList={poll.options} />
-                        </View>
-                    </AccordionItem>
-                ))}
+                    {PollsList.map(poll => (
+                        <AccordionItem
+                            key={new Date() + Math.random()}
+                            headerStyle={styles.headerStyle}
+                            arrowStyle={styles.arrowStyle}
+                            titleComponent={<Text style={styles.header}>{poll.title}</Text>}
+                        >
+                            <View style={styles.itemWrapper}>
+                                <PollsItem optionsList={poll.options} />
+                            </View>
+                        </AccordionItem>
+                    ))}
+                </View>
             </Wrapper>
         );
     }
@@ -46,6 +48,9 @@ class Polls extends React.Component {
 
 
 const styles = StyleSheet.create({
+    wrapper: {
+        paddingHorizontal: WRAPPER_PADDINGS
+    },
     title: {
         color: COLOR_1,
         fontFamily: 'GothamProMedium',

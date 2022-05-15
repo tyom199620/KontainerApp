@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, TouchableOpacity, Image} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {connect} from "react-redux";
 import {ImageCallGreen, ImageEmailGreen, ImageFavorite, ImageOffersArrow, ImageRatingSmall} from "../helpers/images";
-import {COLOR_1, COLOR_2, COLOR_5, COLOR_6, COLOR_8, COLOR_9} from "../helpers/Variables";
+import {COLOR_1, COLOR_2, COLOR_5, COLOR_6, COLOR_8, COLOR_9, WRAPPER_PADDINGS} from "../helpers/Variables";
 import SingleParticipantBlock from "../includes/SingleParticipantBlock";
 import MyInput from "../includes/MyInput";
 import MyButton from "../includes/MyButton";
@@ -28,78 +28,80 @@ class SendOffer extends React.Component {
                 home: true,
                 navigation
             }}>
-                <View style={styles.infoBlock}>
-                    <View style={styles.row}>
-                        <View style={styles.locationInfo}>
-                            <Text style={styles.fromCity}>Калининград</Text>
-                            <ImageOffersArrow />
-                            <Text style={styles.toCity}>Петрозаводск</Text>
+                <View style={styles.wrapper}>
+                    <View style={styles.infoBlock}>
+                        <View style={styles.row}>
+                            <View style={styles.locationInfo}>
+                                <Text style={styles.fromCity}>Калининград</Text>
+                                <ImageOffersArrow />
+                                <Text style={styles.toCity}>Петрозаводск</Text>
+                            </View>
+                            <Text style={styles.price}>32.000 p.</Text>
                         </View>
-                        <Text style={styles.price}>32.000 p.</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <View>
-                            <Text style={styles.type}>Рефрижератор, 20 т.</Text>
-                            <Text style={styles.type}>20-22 апреля</Text>
-                        </View>
-                        <Text style={styles.dateAdded}>9.04.2022</Text>
-                    </View>
-                </View>
-                <View style={styles.company}>
-                    <Image style={styles.companyPhoto} source={{uri: 'https://thumbs.dreamstime.com/b/light-gray-beton-background-loft-design-empty-pure-wallpaper-light-gray-beton-background-loft-design-empty-pure-wallpaper-copy-174515451.jpg'}} />
-                    <View style={styles.companyInfo}>
-                        <Text style={styles.companyName}>ЖелДорИнвест</Text>
-                        <Text style={styles.companyCity}>Россия, Новосибирск</Text>
-                        <Text style={styles.companyPosition}>оператор КП</Text>
-                        <View style={styles.companyRating}>
-                            <ImageRatingSmall />
-                            <Text style={styles.companyRatingText}>4.2</Text>
+                        <View style={styles.row}>
+                            <View>
+                                <Text style={styles.type}>Рефрижератор, 20 т.</Text>
+                                <Text style={styles.type}>20-22 апреля</Text>
+                            </View>
+                            <Text style={styles.dateAdded}>9.04.2022</Text>
                         </View>
                     </View>
-                </View>
+                    <View style={styles.company}>
+                        <Image style={styles.companyPhoto} source={{uri: 'https://thumbs.dreamstime.com/b/light-gray-beton-background-loft-design-empty-pure-wallpaper-light-gray-beton-background-loft-design-empty-pure-wallpaper-copy-174515451.jpg'}} />
+                        <View style={styles.companyInfo}>
+                            <Text style={styles.companyName}>ЖелДорИнвест</Text>
+                            <Text style={styles.companyCity}>Россия, Новосибирск</Text>
+                            <Text style={styles.companyPosition}>оператор КП</Text>
+                            <View style={styles.companyRating}>
+                                <ImageRatingSmall />
+                                <Text style={styles.companyRatingText}>4.2</Text>
+                            </View>
+                        </View>
+                    </View>
 
-                <Text style={styles.header}>Контакты</Text>
-                <SingleParticipantBlock
-                    uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
-                    button={{
-                        label: 'Написать',
-                        onPress: () => {}
-                    }}
-                    style={styles.contactWrapper}
-                >
-                    <Text style={styles.name}>Иванов Пётр Сергеевич</Text>
-                    <Text style={styles.location}>Россия, Новосибирск</Text>
-                    <View style={styles.contacts}>
-                        <Text style={styles.contactsText}>+7 913 320 0001</Text>
-                        <ImageCallGreen />
-                    </View>
-                    <View style={styles.contacts}>
-                        <Text style={styles.contactsText}>petrivanov@company.com</Text>
-                        <ImageEmailGreen />
-                    </View>
-                </SingleParticipantBlock>
+                    <Text style={styles.header}>Контакты</Text>
+                    <SingleParticipantBlock
+                        uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
+                        button={{
+                            label: 'Написать',
+                            onPress: () => {}
+                        }}
+                        style={styles.contactWrapper}
+                    >
+                        <Text style={styles.name}>Иванов Пётр Сергеевич</Text>
+                        <Text style={styles.location}>Россия, Новосибирск</Text>
+                        <View style={styles.contacts}>
+                            <Text style={styles.contactsText}>+7 913 320 0001</Text>
+                            <ImageCallGreen />
+                        </View>
+                        <View style={styles.contacts}>
+                            <Text style={styles.contactsText}>petrivanov@company.com</Text>
+                            <ImageEmailGreen />
+                        </View>
+                    </SingleParticipantBlock>
 
-                <Text style={styles.header}>Направить предложение</Text>
-                <MyInput
-                    label={'Ваша цена'}
-                    keyboardType={'numeric'}
-                    value={price}
-                    onChangeText={val => this.setState({price: val})}
-                />
-                <MyInput
-                    label={'Срок пользования/перевозки, дней'}
-                    keyboardType={'numeric'}
-                    value={periodOfUsing}
-                    onChangeText={val => this.setState({periodOfUsing: val})}
-                />
-                <MyInput
-                    label={'Комментарий'}
-                    value={comment}
-                    onChangeText={val => this.setState({comment: val})}
-                    style={styles.commentInput}
-                    multiline
-                />
-                <MyButton style={styles.submitButton} onPress={() => {}}>Направить предложение</MyButton>
+                    <Text style={styles.header}>Направить предложение</Text>
+                    <MyInput
+                        label={'Ваша цена'}
+                        keyboardType={'numeric'}
+                        value={price}
+                        onChangeText={val => this.setState({price: val})}
+                    />
+                    <MyInput
+                        label={'Срок пользования/перевозки, дней'}
+                        keyboardType={'numeric'}
+                        value={periodOfUsing}
+                        onChangeText={val => this.setState({periodOfUsing: val})}
+                    />
+                    <MyInput
+                        label={'Комментарий'}
+                        value={comment}
+                        onChangeText={val => this.setState({comment: val})}
+                        style={styles.commentInput}
+                        multiline
+                    />
+                    <MyButton style={styles.submitButton} onPress={() => {}}>Направить предложение</MyButton>
+                </View>
             </Wrapper>
         );
     }
@@ -107,6 +109,9 @@ class SendOffer extends React.Component {
 
 
 const styles = StyleSheet.create({
+    wrapper: {
+        paddingHorizontal: WRAPPER_PADDINGS
+    },
     infoBlock: {
         paddingVertical: 30,
         borderBottomWidth: 1,

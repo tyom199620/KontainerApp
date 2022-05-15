@@ -55,7 +55,8 @@ class NavBar extends Component {
 const styles = StyleSheet.create({
     container: {
         marginVertical: 20,
-        height: 30
+        height: 30,
+        paddingHorizontal: WRAPPER_PADDINGS,
     },
     secondaryWrapper: {
         backgroundColor: COLOR_11,
@@ -63,10 +64,9 @@ const styles = StyleSheet.create({
         paddingBottom: 14,
         position: 'absolute',
         width: Dimensions.get('window').width,
-        left: -WRAPPER_PADDINGS,
         zIndex: 1,
-        paddingLeft: WRAPPER_PADDINGS,
-        bottom: 0
+        bottom: 0,
+        paddingHorizontal: WRAPPER_PADDINGS,
     },
     block: {
         marginRight: 30
@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
         fontFamily: 'GothamProRegular',
         fontSize: 10,
         color: COLOR_1,
-        marginBottom: 7
     },
     secondaryActiveText: {
         fontSize: 10

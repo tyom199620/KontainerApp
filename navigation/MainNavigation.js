@@ -12,6 +12,9 @@ import Participants from "../components/screens/Participants";
 import Polls from "../components/screens/Polls";
 import SingleParticipant from "../components/screens/SingleParticipant";
 import SendOffer from "../components/screens/SendOffer";
+import CreatingApplication from "../components/screens/CreatingApplication";
+import EditApplication from "../components/screens/EditApplication";
+import Chat from "../components/screens/Chat";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +37,9 @@ class MainNavigation extends React.Component {
                     <Stack.Screen name="Polls" component={Polls}/>
                     <Stack.Screen name="SingleParticipant" component={SingleParticipant}/>
                     <Stack.Screen name="SendOffer" component={SendOffer}/>
+                    <Stack.Screen name="CreatingApplication" component={CreatingApplication}/>
+                    <Stack.Screen name="EditApplication" component={EditApplication}/>
+                    <Stack.Screen name="Chat" component={Chat}/>
                 </Stack.Navigator>
             </NavigationContainer>
         )

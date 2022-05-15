@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
-import {COLOR_1, WRAPPER_PADDINGS} from "../helpers/Variables";
+import {COLOR_1, COLOR_5, WRAPPER_PADDINGS} from "../helpers/Variables";
 import {ImageBackArrow, ImageHomeIcon, ImageNotificationsIcon, ImageSave} from "../helpers/images";
 
 class Header extends React.Component {
@@ -46,9 +46,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'absolute',
-        top: 60,
-        left: WRAPPER_PADDINGS,
-        width: '100%'
+        paddingTop: 60,
+        width: '100%',
+        paddingHorizontal: WRAPPER_PADDINGS,
+        backgroundColor: COLOR_5,
+        zIndex: 2,
+        paddingBottom: 14
+
     },
     imageView: {
         marginRight: 20

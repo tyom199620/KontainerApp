@@ -20,7 +20,7 @@ class HomeMainButtons extends React.Component {
                     <ImageParticipants style={styles.image}/>
                     <Text style={styles.text}>Участники</Text>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Messages', {currentPage: 'Чаты'})}
+                <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Messages', {currentPage: 'Сообщения'})}
                                   style={[styles.block, styles.borderTopRight, styles.bgBlue]}>
                     <ImageMessages style={styles.image}/>
                     <Text style={styles.text}>Чаты</Text>

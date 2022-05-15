@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {connect} from "react-redux";
 import NavBar from "../includes/NavBar";
-import {COLOR_1, COLOR_6, COLOR_8, COLOR_9} from "../helpers/Variables";
+import {COLOR_1, COLOR_6, COLOR_8, COLOR_9, WRAPPER_PADDINGS} from "../helpers/Variables";
 import {ImageBiggerPlaceholder, ImageCalendar, ImageLike, ImageNextArrow} from "../helpers/images";
 import AccordionItem from "../includes/AccordionItem";
 import MyButton from "../includes/MyButton";
@@ -66,80 +66,82 @@ class Events extends React.Component {
                     tabs={tabs}
                     activeTab={activeTab}
                 />
-                <Text style={styles.title}>Единый слет операторов и экспедиторов 2022</Text>
-                <View style={styles.info}>
-                    <View style={styles.date}>
-                        <ImageCalendar />
-                        <Text style={styles.dateText}>15.05.2022</Text>
+                <View style={styles.wrapper}>
+                    <Text style={styles.title}>Единый слет операторов и экспедиторов 2022</Text>
+                    <View style={styles.info}>
+                        <View style={styles.date}>
+                            <ImageCalendar />
+                            <Text style={styles.dateText}>15.05.2022</Text>
+                        </View>
+                        <TouchableOpacity style={styles.location}>
+                            <ImageBiggerPlaceholder />
+                            <Text style={styles.locationText}>Отель Hilton Garden Inn (конференция)</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.location}>
+                            <ImageBiggerPlaceholder />
+                            <Text style={styles.locationText}>Ресторан Пино Шато (гала-ужин)</Text>
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.location}>
-                        <ImageBiggerPlaceholder />
-                        <Text style={styles.locationText}>Отель Hilton Garden Inn (конференция)</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.location}>
-                        <ImageBiggerPlaceholder />
-                        <Text style={styles.locationText}>Ресторан Пино Шато (гала-ужин)</Text>
-                    </TouchableOpacity>
+                    <Text style={styles.header}>Программа мероприятия</Text>
+                    <AccordionItem
+                        arrowStyle={styles.arrowStyle}
+                        titleComponent={this.titleComponent('10:00', '12:00', 'Сессия I «Тренды»')}
+                    >
+                        <View style={styles.item}>
+                            {this.sectionComponent(
+                                'Актуальные тренды развития контейнерных перевозок',
+                                'С другой стороны начало повседневной работы по формированию позиции играет важную роль в формировании существенных финансовых и административных условий.',
+                                'Иван Владимиров',
+                                'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
+                                'ген.директор «ЖелДорИнвест»',
+                            )}
+                            {this.sectionComponent(
+                                'Актуальные тренды развития контейнерных перевозок',
+                                'С другой стороны начало повседневной работы по формированию позиции играет важную роль в формировании существенных финансовых и административных условий.',
+                                'Иван Владимиров',
+                                'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
+                                'ген.директор «ЖелДорИнвест»',
+                            )}
+                            <TouchableOpacity style={styles.nextArrow}>
+                                <ImageNextArrow />
+                            </TouchableOpacity>
+                        </View>
+                    </AccordionItem>
+                    <AccordionItem
+                        arrowStyle={styles.arrowStyle}
+                        titleComponent={this.titleComponent('10:00', '12:00', 'Сессия I «Тренды»')}
+                    >
+                        <View style={styles.item}>
+                            {this.sectionComponent(
+                                'Актуальные тренды развития контейнерных перевозок',
+                                'С другой стороны начало повседневной работы по формированию позиции играет важную роль в формировании существенных финансовых и административных условий.',
+                                'Иван Владимиров',
+                                'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
+                                'ген.директор «ЖелДорИнвест»',
+                            )}
+                            <TouchableOpacity style={styles.nextArrow}>
+                                <ImageNextArrow />
+                            </TouchableOpacity>
+                        </View>
+                    </AccordionItem>
+                    <AccordionItem
+                        arrowStyle={styles.arrowStyle}
+                        titleComponent={this.titleComponent('10:00', '12:00', 'Сессия I «Тренды»')}
+                    >
+                        <View style={styles.item}>
+                            {this.sectionComponent(
+                                'Актуальные тренды развития контейнерных перевозок',
+                                'С другой стороны начало повседневной работы по формированию позиции играет важную роль в формировании существенных финансовых и административных условий.',
+                                'Иван Владимиров',
+                                'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
+                                'ген.директор «ЖелДорИнвест»',
+                            )}
+                            <TouchableOpacity style={styles.nextArrow}>
+                                <ImageNextArrow />
+                            </TouchableOpacity>
+                        </View>
+                    </AccordionItem>
                 </View>
-                <Text style={styles.header}>Программа мероприятия</Text>
-                <AccordionItem
-                    arrowStyle={styles.arrowStyle}
-                    titleComponent={this.titleComponent('10:00', '12:00', 'Сессия I «Тренды»')}
-                >
-                    <View style={styles.item}>
-                        {this.sectionComponent(
-                            'Актуальные тренды развития контейнерных перевозок',
-                            'С другой стороны начало повседневной работы по формированию позиции играет важную роль в формировании существенных финансовых и административных условий.',
-                            'Иван Владимиров',
-                            'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
-                            'ген.директор «ЖелДорИнвест»',
-                        )}
-                        {this.sectionComponent(
-                            'Актуальные тренды развития контейнерных перевозок',
-                            'С другой стороны начало повседневной работы по формированию позиции играет важную роль в формировании существенных финансовых и административных условий.',
-                            'Иван Владимиров',
-                            'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
-                            'ген.директор «ЖелДорИнвест»',
-                        )}
-                        <TouchableOpacity style={styles.nextArrow}>
-                            <ImageNextArrow />
-                        </TouchableOpacity>
-                    </View>
-                </AccordionItem>
-                <AccordionItem
-                    arrowStyle={styles.arrowStyle}
-                    titleComponent={this.titleComponent('10:00', '12:00', 'Сессия I «Тренды»')}
-                >
-                    <View style={styles.item}>
-                        {this.sectionComponent(
-                            'Актуальные тренды развития контейнерных перевозок',
-                            'С другой стороны начало повседневной работы по формированию позиции играет важную роль в формировании существенных финансовых и административных условий.',
-                            'Иван Владимиров',
-                            'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
-                            'ген.директор «ЖелДорИнвест»',
-                        )}
-                        <TouchableOpacity style={styles.nextArrow}>
-                            <ImageNextArrow />
-                        </TouchableOpacity>
-                    </View>
-                </AccordionItem>
-                <AccordionItem
-                    arrowStyle={styles.arrowStyle}
-                    titleComponent={this.titleComponent('10:00', '12:00', 'Сессия I «Тренды»')}
-                >
-                    <View style={styles.item}>
-                        {this.sectionComponent(
-                            'Актуальные тренды развития контейнерных перевозок',
-                            'С другой стороны начало повседневной работы по формированию позиции играет важную роль в формировании существенных финансовых и административных условий.',
-                            'Иван Владимиров',
-                            'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg',
-                            'ген.директор «ЖелДорИнвест»',
-                        )}
-                        <TouchableOpacity style={styles.nextArrow}>
-                            <ImageNextArrow />
-                        </TouchableOpacity>
-                    </View>
-                </AccordionItem>
             </Wrapper>
         );
     }
@@ -147,6 +149,9 @@ class Events extends React.Component {
 
 
 const styles = StyleSheet.create({
+    wrapper: {
+        paddingHorizontal: WRAPPER_PADDINGS
+    },
     title: {
         fontFamily: 'GothamProMedium',
         fontSize: 12,

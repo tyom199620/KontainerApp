@@ -4,6 +4,7 @@ import Wrapper from "../helpers/Wrapper";
 import HomeMainButtons from "../includes/HomeMainButtons";
 import HomeFooterButtons from "../includes/HomeFooterButtons";
 import {ImageLogo} from "../helpers/images";
+import {WRAPPER_PADDINGS} from "../helpers/Variables";
 
 class Home extends React.Component {
     render() {
@@ -14,14 +15,17 @@ class Home extends React.Component {
                 header={{
                     home: true,
                     navigation
-                }}>
-                <View style={styles.block}>
-                    <View style={styles.logoView}>
-                        <ImageLogo style={styles.logo}/>
+                }}
+            >
+                <View style={styles.wrapper}>
+                    <View style={styles.block}>
+                        <View style={styles.logoView}>
+                            <ImageLogo style={styles.logo}/>
+                        </View>
                     </View>
+                    <HomeMainButtons navigation={navigation}/>
+                    <HomeFooterButtons navigation={navigation}/>
                 </View>
-                <HomeMainButtons navigation={navigation}/>
-                <HomeFooterButtons navigation={navigation}/>
             </Wrapper>
         );
     }
@@ -39,6 +43,9 @@ const styles = StyleSheet.create({
     logo: {
         width: 120,
         height: 32,
+    },
+    wrapper: {
+        paddingHorizontal: WRAPPER_PADDINGS
     }
 });
 

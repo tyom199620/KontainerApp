@@ -54,3 +54,14 @@ export {default as ImageLikeBlue} from '../../assets/images/like1.svg';
 export {default as ImageOffersArrow} from '../../assets/images/offers_arrow.svg';
 export {default as ImageRatingSmall} from '../../assets/images/rating_small.svg';
 export {default as ImageSend} from '../../assets/images/send.svg';
+export {default as ImageFadePart} from '../../assets/images/fade_part.png';
+export {default as ImageEdit} from '../../assets/images/edit.svg';
+export {default as ImageBlankApplications} from '../../assets/images/blank_apps.svg';
+export {default as ImageAddNew} from '../../assets/images/add_new.svg';
+export {default as ImageCalendarSmall} from '../../assets/images/input_calendar.svg';
+
+export {default as ImageAttach} from '../../assets/images/attach.svg';
+export {default as ImageLikeSmall} from '../../assets/images/likeSmall.svg';
+export {default as ImageLikeSmallBlue} from '../../assets/images/likeSmallBlue.svg';
+export {default as ImageReply} from '../../assets/images/reply.svg';
+export {default as ImageDelete} from '../../assets/images/delete.svg';

@@ -1,14 +1,22 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View, Text} from "react-native";
+import {StyleSheet, TouchableOpacity, View, Text, Image} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {connect} from "react-redux";
 import NavBar from "../includes/NavBar";
 import Search from "../includes/Search";
-import {ImageFavorite, ImageFilter, ImageOffersArrow, ImageRatingSmall, ImageSend} from "../helpers/images";
+import {
+    ImageEdit,
+    ImageFadePart,
+    ImageFavorite,
+    ImageFilter,
+    ImageOffersArrow,
+    ImageRatingSmall,
+    ImageSend
+} from "../helpers/images";
 import FilterItem from "../includes/FilterItem";
 import {SwipeListView} from "react-native-swipe-list-view";
 import OffersList from "../../assets/data/offers";
-import {COLOR_2, COLOR_5, COLOR_6, COLOR_8, COLOR_9} from "../helpers/Variables";
+import {COLOR_2, COLOR_5, COLOR_6, COLOR_8, COLOR_9, WRAPPER_PADDINGS} from "../helpers/Variables";
 
 class Offers extends React.Component {
     constructor(props) {
@@ -27,9 +35,6 @@ class Offers extends React.Component {
             },
             showFilters: false,
             searchValue: '',
-            listViewData: Array(150)
-                .fill("")
-                .map((_, i) => ({ key: `${i}`, text: `item #${i}` }))
         };
     }
 
@@ -38,7 +43,7 @@ class Offers extends React.Component {
             <View style={styles.row}>
                 <View style={styles.locationInfo}>
                     <Text style={styles.fromCity}>{item.from}</Text>
-                    <ImageOffersArrow />
+                    <ImageOffersArrow/>
                     <Text style={styles.toCity}>{item.to}</Text>
                 </View>
                 <Text style={styles.price}>{item.price}</Text>
@@ -49,12 +54,12 @@ class Offers extends React.Component {
                     <Text style={styles.type}>{item.date}</Text>
                 </View>
                 <TouchableOpacity>
-                    <ImageFavorite />
+                    <ImageFavorite/>
                 </TouchableOpacity>
             </View>
             <View style={styles.row}>
                 <View style={styles.ratingBlock}>
-                    <ImageRatingSmall />
+                    <ImageRatingSmall/>
                     <Text style={styles.rating}>{item.rating}</Text>
                     <Text style={styles.companyName}>{item.companyName}</Text>
                 </View>
@@ -63,16 +68,11 @@ class Offers extends React.Component {
         </View>
     )
 
-    render() {
-        const {route, navigation} = this.props;
+    headerComponent = () => {
         const {tabs, activeTab, secondaryTabs, activeSecondaryTab, filters, showFilters, searchValue} = this.state;
-        const {currentPage} = route.params;
+
         return (
-            <Wrapper withoutScrollView withContainer header={{
-                currentPage,
-                home: true,
-                navigation
-            }}>
+            <View style={styles.header}>
                 <NavBar
                     tabs={tabs}
                     activeTab={activeTab}
@@ -84,7 +84,6 @@ class Offers extends React.Component {
                     onPress={tab => this.setState({activeSecondaryTab: tab})}
                     secondary
                 />
-
                 <View style={styles.searchRow}>
                     <Search
                         style={styles.search}
@@ -110,27 +109,55 @@ class Offers extends React.Component {
                         ))}
                     </View>
                 )}
+            </View>
+        )
+    }
 
-
+    render() {
+        const {route, navigation} = this.props;
+        const {currentPage} = route.params;
+        return (
+            <Wrapper
+                withoutScrollView
+                withContainer
+                header={{
+                    currentPage,
+                    home: true,
+                    navigation
+                }}
+            >
                 <SwipeListView
                     data={OffersList}
                     renderItem={this.renderItem}
-                    renderHiddenItem={ () => (
-                        <TouchableOpacity
-                            style={styles.hiddenItem}
-                            onPress={() => navigation.navigate('SendOffer', {currentPage: 'Отправить предложение'})}
-                        >
-                            <ImageSend />
-                            <View style={styles.hiddenItemTextBlock}>
-                                <Text style={styles.hiddenItemText}>Отправить</Text>
-                                <Text style={styles.hiddenItemText}>предложение</Text>
-                            </View>
-                        </TouchableOpacity>
-                    )}
-                    rightOpenValue={-85}
-                    disableRightSwipe
-                />
+                    ListHeaderComponent={this.headerComponent()}
+                    renderHiddenItem={() => (
+                        <View style={styles.hiddenWrapper}>
+                            <TouchableOpacity
+                                style={styles.hiddenItem}
+                                onPress={() => navigation.navigate('SendOffer', {currentPage: 'Отправить предложение'})}
+                            >
+                                <View style={styles.hiddenBlock}>
+                                    <ImageSend/>
 
+                                    <View style={styles.hiddenItemTextBlock}>
+                                        <Text style={styles.hiddenItemText}>Отправить</Text>
+                                        <Text style={styles.hiddenItemText}>предложение</Text>
+
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    )}
+                    rightOpenValue={-110}
+                    disableRightSwipe
+                    keyExtractor={(item) => item.id}
+                    showsVerticalScrollIndicator ={false}
+                    contentContainerStyle={{flexGrow: 1}}
+                    stickyHeaderIndices={[0]}
+                />
+                <View style={styles.fadeBlock}>
+                    <Image source={ImageFadePart} style={styles.fade} />
+                </View>
 
             </Wrapper>
         );
@@ -142,19 +169,24 @@ const styles = StyleSheet.create({
     searchRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingHorizontal: WRAPPER_PADDINGS,
+        marginTop: -20
     },
     search: {
         width: '90%'
     },
     filtersRow: {
         flexDirection: 'row',
+        paddingBottom: 10,
+        paddingHorizontal: WRAPPER_PADDINGS,
     },
     item: {
         backgroundColor: COLOR_5,
         paddingVertical: 20,
         borderBottomColor: COLOR_6,
         borderBottomWidth: 1,
+        paddingHorizontal: WRAPPER_PADDINGS,
     },
     row: {
         flexDirection: 'row',
@@ -213,27 +245,49 @@ const styles = StyleSheet.create({
         fontSize: 10,
         fontFamily: 'GothamProRegular'
     },
-    hiddenItem: {
-        alignSelf: 'flex-end',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        borderLeftColor: COLOR_6,
-        borderLeftWidth: 1,
-        paddingLeft: 8,
-        height: 90,
-
+    hiddenWrapper: {
+        paddingVertical: 16,
         position: 'absolute',
         right: 0,
-        top: 20
+        top: 0,
+        paddingRight: WRAPPER_PADDINGS,
+        height: '100%',
+    },
+    hiddenItem: {
+        alignSelf: 'flex-end',
+        justifyContent: 'center',
+        borderLeftColor: COLOR_6,
+        borderLeftWidth: 1,
+        height: '100%',
+        paddingLeft: 8,
+    },
+    hiddenBlock: {
+        alignItems: 'center',
     },
     hiddenItemTextBlock: {
         alignItems: 'center',
+        marginTop: 10
     },
     hiddenItemText: {
         color: '#000',
         fontSize: 9,
-        fontFamily: 'GothamProRegular'
+        fontFamily: 'GothamProRegular',
     },
+    header: {
+        backgroundColor: COLOR_5
+    },
+    fadeBlock: {
+        height: '100%',
+        width: WRAPPER_PADDINGS,
+        position: 'absolute',
+        zIndex: 2,
+        top: 200,
+        left: 0,
+    },
+    fade: {
+        width: '100%',
+        height: '100%',
+    }
 });
 
 const mapStateToProps = (store) => ({

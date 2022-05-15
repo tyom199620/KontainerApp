@@ -69,7 +69,7 @@ class Login extends React.Component {
         const {login, password, loginError, passwordError, showModal, showPassword, showForgotPasswordModal, emailForNewPassword} = this.state;
 
         return (
-            <Wrapper withImage>
+            <Wrapper withImage withPaddings>
                 <View style={styles.block}>
                     <View style={styles.logoView}>
                         <ImageLogo style={styles.logo} />

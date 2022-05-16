@@ -13,7 +13,7 @@ class MyInput extends React.Component {
 
 
     render() {
-        const {label, style, labelStyle, error, onEyePressed, showEye, ...p} = this.props
+        const {label, style, labelStyle, error, onEyePressed, showEye, sendComponent, ...p} = this.props
         const {isActive} = this.state;
 
         return (
@@ -35,6 +35,7 @@ class MyInput extends React.Component {
                             <ImageUnSeePassword style={styles.unsee} />}
                     </TouchableOpacity>
                 ) : null}
+                {sendComponent && sendComponent}
                 {error && error[0] ? (
                     <Text style={styles.error}>{error[0]}</Text>
                 ) : null}

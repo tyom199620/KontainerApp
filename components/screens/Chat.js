@@ -1,5 +1,15 @@
 import React from 'react';
-import {Dimensions, FlatList, StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
+import {
+    Dimensions,
+    FlatList,
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Image,
+    KeyboardAvoidingView,
+    Platform
+} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import MessagesList from "../../assets/data/messages";
 import {COLOR_1, COLOR_10, COLOR_2, COLOR_5, COLOR_6, COLOR_8, COLOR_9, WRAPPER_PADDINGS} from "../helpers/Variables";
@@ -13,31 +23,36 @@ class Chat extends React.Component {
         this.state = {
             searchValue: '',
             inputValue: '',
-            inputBottom: 6
+            inputBottom: 6,
+            inputHeight: 40
         }
     }
 
     sendMessage = () => {
         const {inputValue} = this.state;
         console.log({inputValue});
-        this.setState({inputValue: ''})
+        this.setState({inputValue: '', inputHeight: 40})
     }
 
     footerComponent = () => {
-        const {inputValue, inputBottom} = this.state;
+        const {inputValue, inputBottom, inputHeight} = this.state;
         return (
             <View style={styles.footer}>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.attach}>
                     <ImageAttach/>
                 </TouchableOpacity>
                 <View style={styles.inputView}>
                     <MyInput
                         value={inputValue}
                         onChangeText={val => this.setState({inputValue: val})}
-                        style={[styles.input, {bottom: inputBottom}]}
+                        style={[styles.input, {height: inputHeight <= 20 ? 30 : inputHeight <= 80 ? inputHeight : 80}]}
+                        maxHeight={80}
                         multiline
                         onContentSizeChange={(event) => {
-                            this.setState({inputBottom: this.countInputBottom(event.nativeEvent.contentSize.height)})
+                            this.setState({
+                                inputBottom: this.countInputBottom(event.nativeEvent.contentSize.height),
+                                inputHeight: event.nativeEvent.contentSize.height
+                            })
                         }}
                         placeholder={'Напишите сообщение...'}
                         sendComponent={inputValue ? <TouchableOpacity
@@ -153,7 +168,7 @@ class Chat extends React.Component {
 
     countSendBottom = inputBottom => {
         const lines = Math.floor((inputBottom / 10));
-        if (!lines) return 12;
+        if (!lines) return 5;
         else if (lines < 5) return lines * 8;
         else return 40
     }
@@ -221,15 +236,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: 80
+        height: Dimensions.get('window').height * 8 / 100
     },
     inputView: {
         width: '90%',
     },
     input: {
-        height: undefined,
-        paddingTop: 8,
-        paddingBottom: 6,
+        height: 40,
         color: COLOR_8,
         fontSize: 10,
         fontFamily: 'GothamProRegular',
@@ -318,7 +331,9 @@ const styles = StyleSheet.create({
         color: COLOR_9,
         lineHeight: 11
     },
-
+    attach: {
+        marginTop: 11
+    }
 });
 
 export default Chat;

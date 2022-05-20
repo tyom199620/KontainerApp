@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        marginTop: 50
+        marginTop: 50,
     },
     block: {
         width: '30%',

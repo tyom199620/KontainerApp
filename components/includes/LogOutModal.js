@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         backgroundColor: COLOR_5,
-        width: '76%',
+        width: '80%',
         position: 'absolute',
         paddingHorizontal: 30,
         paddingVertical: 25,

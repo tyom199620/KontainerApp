@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet} from "react-native";
+import {StyleSheet, TouchableWithoutFeedback} from "react-native";
 import {View, TouchableOpacity, Text} from "react-native";
 import {ImageArrowSmall, ImageArrowSmallUp} from "../helpers/images";
 import Modal from "react-native-modal";
@@ -15,7 +15,7 @@ class FilterItem extends Component {
 
 
     render() {
-        const {title, onSelect, options} = this.props
+        const {title, onSelect, options, top} = this.props
         const {expanded} = this.state
         return (
             <View>
@@ -28,8 +28,20 @@ class FilterItem extends Component {
                     {expanded ? <ImageArrowSmallUp /> : <ImageArrowSmall /> }
                 </TouchableOpacity>
 
-                {expanded && (
-                    <View style={styles.showPart}>
+                <Modal
+                    isVisible={expanded}
+                    transparent={true}
+                    animationIn={'fadeInDown'}
+                    animationOut={'fadeOutUp'}
+                    onRequestClose={() => this.setState({expanded: false})}
+                    hardwareAccelerated={true}
+                    style={styles.modal}
+                    onBackdropPress={() => this.setState({expanded: false})}
+                    backdropOpacity={0}
+                    animationInTiming={100}
+                    animationOutTiming={100}
+                >
+                    <View style={[styles.showPart, {top}]}>
                         {options.map(option => (
                             <TouchableOpacity
                                 activeOpacity={0.7}
@@ -44,7 +56,7 @@ class FilterItem extends Component {
                             </TouchableOpacity>
                         ))}
                     </View>
-                )}
+                </Modal>
             </View>
         );
     }
@@ -67,14 +79,15 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR_5,
         paddingHorizontal: 8,
         paddingVertical: 20,
-        top: 20,
+        width: '70%',
+        left: 6,
         zIndex: 2,
-        borderLeftWidth: 1,
-        borderLeftColor: COLOR_9,
-        borderRightWidth: 1,
-        borderRightColor: COLOR_9,
-        borderBottomWidth: 1,
-        borderBottomColor: COLOR_9,
+        borderWidth: 1,
+        borderColor: COLOR_1,
+        borderRadius: 10,
+        borderTopWidth: 0,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
     },
     optionBlock: {
         marginBottom: 18

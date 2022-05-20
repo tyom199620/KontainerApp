@@ -40,7 +40,7 @@ class Help extends React.Component {
                         arrowStyle={styles.arrowStyle}
                         arrowComponent={<ImageArrowRight style={styles.arrowRight} />}
                         titleComponent={<Text style={styles.header}>Пользовательское соглашение</Text>}
-                        onPress={() => {}}
+                        onPress={() => {navigation.navigate('TermsOfAgreement', {currentPage: 'Польз.-ское соглашение'})}}
                     />
                 </View>
             </Wrapper>

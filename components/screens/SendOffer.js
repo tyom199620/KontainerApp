@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image} from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity, Image, ScrollView} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {connect} from "react-redux";
 import {ImageCallGreen, ImageEmailGreen, ImageFavorite, ImageOffersArrow, ImageRatingSmall} from "../helpers/images";
@@ -60,25 +60,30 @@ class SendOffer extends React.Component {
                     </View>
 
                     <Text style={styles.header}>Контакты</Text>
-                    <SingleParticipantBlock
-                        uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
-                        button={{
-                            label: 'Написать',
-                            onPress: () => {}
-                        }}
-                        style={styles.contactWrapper}
-                    >
-                        <Text style={styles.name}>Иванов Пётр Сергеевич</Text>
-                        <Text style={styles.location}>Россия, Новосибирск</Text>
-                        <View style={styles.contacts}>
-                            <Text style={styles.contactsText}>+7 913 320 0001</Text>
-                            <ImageCallGreen />
-                        </View>
-                        <View style={styles.contacts}>
-                            <Text style={styles.contactsText}>petrivanov@company.com</Text>
-                            <ImageEmailGreen />
-                        </View>
-                    </SingleParticipantBlock>
+                    <ScrollView style={styles.contactsList} nestedScrollEnabled>
+                        {new Array(5).fill(undefined).map((contact, index) => (
+                            <SingleParticipantBlock
+                                key={index}
+                                uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
+                                button={{
+                                    label: 'Написать',
+                                    onPress: () => {navigation.navigate('Chat', {currentPage: 'Диалог'})}
+                                }}
+                                style={styles.contactsBlock}
+                            >
+                                <Text style={styles.name}>Иванов Пётр Сергеевич</Text>
+                                <Text style={styles.location}>Россия, Новосибирск</Text>
+                                <View style={styles.contacts}>
+                                    <Text style={styles.contactsText}>+7 913 320 0001</Text>
+                                    <ImageCallGreen />
+                                </View>
+                                <View style={styles.contacts}>
+                                    <Text style={styles.contactsText}>petrivanov@company.com</Text>
+                                    <ImageEmailGreen />
+                                </View>
+                            </SingleParticipantBlock>
+                        ))}
+                    </ScrollView>
 
                     <Text style={styles.header}>Направить предложение</Text>
                     <MyInput
@@ -111,6 +116,15 @@ class SendOffer extends React.Component {
 const styles = StyleSheet.create({
     wrapper: {
         paddingHorizontal: WRAPPER_PADDINGS
+    },
+    contactsList: {
+        height: 350,
+        marginBottom: 30
+    },
+    contactsBlock: {
+        borderBottomWidth: 1,
+        borderBottomColor: COLOR_6,
+        paddingBottom: 20
     },
     infoBlock: {
         paddingVertical: 30,

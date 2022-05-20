@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from "react-native";
+import React, {Component} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity, Dimensions} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {COLOR_1, COLOR_2, LOGIN_PAGE_PADDINGS} from "../helpers/Variables";
 import MyInput from "../includes/MyInput";
@@ -121,8 +121,8 @@ class Login extends React.Component {
 
 const styles = StyleSheet.create({
     block: {
-        marginTop: 180,
-        paddingHorizontal: LOGIN_PAGE_PADDINGS
+        marginTop: Dimensions.get('window').height * 20 / 100,
+        paddingHorizontal: LOGIN_PAGE_PADDINGS,
     },
     logoView: {
         width: '100%',
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         paddingBottom: 0,
     },
     loginButton: {
-        marginVertical: 50
+        marginVertical: Dimensions.get('window').height * 5 / 100
     },
     buttonsView: {
         flexDirection: 'column',

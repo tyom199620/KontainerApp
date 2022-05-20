@@ -52,13 +52,14 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 16
+        marginBottom: 16,
     },
     info: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '80%',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        flexWrap: 'wrap'
     },
     image: {
         width: 50,

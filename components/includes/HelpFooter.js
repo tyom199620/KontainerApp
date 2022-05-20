@@ -49,13 +49,16 @@ const styles = StyleSheet.create({
     },
     contactRow: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
     },
     contactBlock: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom: 12,
+        alignItems: 'center'
     },
     contactImg: {
-        marginRight: 20
+        marginRight: 10
     },
     contactDesc: {
         fontSize: 12,

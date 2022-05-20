@@ -24,7 +24,7 @@ class Header extends React.Component {
                             <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.homeImageView}>
                                 <ImageHomeIcon style={styles.homeImage}/>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate('MyProfile')}
+                            <TouchableOpacity onPress={() => {}}
                                               style={styles.notificationImageView}>
                                 <ImageNotificationsIcon style={styles.notificationImage}/>
                             </TouchableOpacity>

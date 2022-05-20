@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
+import {Dimensions, StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
 import Modal from "react-native-modal";
 import {COLOR_2, COLOR_5} from "../helpers/Variables";
 
@@ -22,7 +22,9 @@ class RegistrationModal extends React.Component {
             >
                 <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
                     <View style={styles.modalWrapper}>
-                        <View style={styles.triangle}></View>
+                        {Dimensions.get('window').height > 800 && (
+                            <View style={styles.triangle}></View>
+                        )}
                         <Text style={styles.modalText}>
                             Для регистрации в Системе и получения доступа к мобильному приложению просим обратиться к
                             Организатору:
@@ -43,9 +45,10 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR_2,
         width: '76%',
         position: 'absolute',
-        top: 600,
+        top: Dimensions.get('window').height > 800 ? Dimensions.get('window').height * 65 / 100 : undefined,
+        bottom: Dimensions.get('window').height < 800 ? 0 : undefined,
         paddingHorizontal: 20,
-        paddingVertical: 25,
+        paddingVertical: Dimensions.get('window').height * 3 / 100,
         borderRadius: 10
     },
     modalText: {

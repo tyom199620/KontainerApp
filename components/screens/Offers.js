@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View, Text, Image} from "react-native";
+import {StyleSheet, TouchableOpacity, View, Text, Image, Pressable} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {connect} from "react-redux";
 import NavBar from "../includes/NavBar";
@@ -38,35 +38,38 @@ class Offers extends React.Component {
         };
     }
 
-    renderItem = ({item}) => (
-        <View style={styles.item}>
-            <View style={styles.row}>
-                <View style={styles.locationInfo}>
-                    <Text style={styles.fromCity}>{item.from}</Text>
-                    <ImageOffersArrow/>
-                    <Text style={styles.toCity}>{item.to}</Text>
+    renderItem = ({item}) => {
+        const {navigation} = this.props;
+        return (
+            <Pressable style={styles.item} onPress={() => navigation.navigate('SendOffer', {currentPage: 'Отправить предложение'})}>
+                <View style={styles.row}>
+                    <View style={styles.locationInfo}>
+                        <Text style={styles.fromCity}>{item.from}</Text>
+                        <ImageOffersArrow/>
+                        <Text style={styles.toCity}>{item.to}</Text>
+                    </View>
+                    <Text style={styles.price}>{item.price}</Text>
                 </View>
-                <Text style={styles.price}>{item.price}</Text>
-            </View>
-            <View style={styles.row}>
-                <View>
-                    <Text style={styles.type}>{item.type}</Text>
-                    <Text style={styles.type}>{item.date}</Text>
+                <View style={styles.row}>
+                    <View>
+                        <Text style={styles.type}>{item.type}</Text>
+                        <Text style={styles.type}>{item.date}</Text>
+                    </View>
+                    <TouchableOpacity>
+                        <ImageFavorite/>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity>
-                    <ImageFavorite/>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.row}>
-                <View style={styles.ratingBlock}>
-                    <ImageRatingSmall/>
-                    <Text style={styles.rating}>{item.rating}</Text>
-                    <Text style={styles.companyName}>{item.companyName}</Text>
+                <View style={styles.row}>
+                    <View style={styles.ratingBlock}>
+                        <ImageRatingSmall/>
+                        <Text style={styles.rating}>{item.rating}</Text>
+                        <Text style={styles.companyName}>{item.companyName}</Text>
+                    </View>
+                    <Text style={styles.dateAdded}>{item.dateAdded}</Text>
                 </View>
-                <Text style={styles.dateAdded}>{item.dateAdded}</Text>
-            </View>
-        </View>
-    )
+            </Pressable>
+        )
+    }
 
     headerComponent = () => {
         const {tabs, activeTab, secondaryTabs, activeSecondaryTab, filters, showFilters, searchValue} = this.state;
@@ -105,6 +108,7 @@ class Offers extends React.Component {
                                 options={[1982374, 23987462893, 28394789, 28368932]}
                                 onSelect={option => console.log({option})}
                                 key={Math.random()}
+                                top={274}
                             />
                         ))}
                     </View>

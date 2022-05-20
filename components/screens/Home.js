@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from "react-native";
+import {Dimensions, StyleSheet, View} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import HomeMainButtons from "../includes/HomeMainButtons";
 import HomeFooterButtons from "../includes/HomeFooterButtons";
@@ -33,7 +33,7 @@ class Home extends React.Component {
 
 const styles = StyleSheet.create({
     block: {
-        marginTop: 180
+        marginTop: Dimensions.get('window').height * 20 / 100,
     },
     logoView: {
         width: '100%',

@@ -57,11 +57,13 @@ class Participants extends React.Component {
                                 title={'Профиль деятельности'}
                                 options={[1982374, 23987462893, 28394789, 28368932]}
                                 onSelect={option => this.setState({doingProfile: option})}
+                                top={204}
                             />
                             <FilterItem
                                 title={'Город'}
                                 options={[1982374, 23987462893, 28394789, 28368932]}
                                 onSelect={option => this.setState({city: option})}
+                                top={204}
                             />
                         </View>
                     )}

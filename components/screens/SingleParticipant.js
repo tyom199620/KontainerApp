@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from "react-native";
+import {StyleSheet, View, Text, ScrollView} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {connect} from "react-redux";
 import SingleParticipantBlock from "../includes/SingleParticipantBlock";
@@ -14,19 +14,42 @@ import {
 import {COLOR_1, COLOR_6, WRAPPER_PADDINGS} from "../helpers/Variables";
 import MyButton from "../includes/MyButton";
 import ReviewItem from "../includes/ReviewItem";
+import LeaveReviewModal from "../includes/LeaveReviewModal";
+import { showMessage } from "react-native-flash-message";
+import MoreReviewsModal from "../includes/MoreReviewsModal";
 
 class SingleParticipant extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            reviewText: '',
+            showReviewModal: false,
+
+            showMoreReviewsModal: false,
+            toOrFrom: ''
+        };
     }
 
-    leaveReview = () => {}
-    moreReviews = () => {}
+    leaveReview = () => {
+        this.setState({showReviewModal: true})
+    }
+
+    reviewSubmit = () => {
+        showMessage({
+            message: "Ваш отзыв успешно сохранён",
+            type: "success",
+        })
+        this.setState({showReviewModal: false, reviewText: ''})
+    }
+
+    moreReviews = (toOrFrom) => {
+        this.setState({showMoreReviewsModal: true, toOrFrom})
+    }
 
     render() {
         const {route, navigation} = this.props;
         const {currentPage} = route.params;
+        const {reviewText, showReviewModal, toOrFrom, showMoreReviewsModal} = this.state;
         return (
             <Wrapper withContainer header={{
                 currentPage,
@@ -58,24 +81,31 @@ class SingleParticipant extends React.Component {
                     </SingleParticipantBlock>
 
                     <Text style={styles.header}>Контакты</Text>
-                    <SingleParticipantBlock
-                        uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
-                        button={{
-                            label: 'Написать',
-                            onPress: () => {}
-                        }}
-                    >
-                        <Text style={styles.name}>Иванов Пётр Сергеевич</Text>
-                        <Text style={styles.location}>Россия, Новосибирск</Text>
-                        <View style={styles.contacts}>
-                            <Text style={styles.contactsText}>+7 913 320 0001</Text>
-                            <ImageCallGreen />
-                        </View>
-                        <View style={styles.contacts}>
-                            <Text style={styles.contactsText}>petrivanov@company.com</Text>
-                            <ImageEmailGreen />
-                        </View>
-                    </SingleParticipantBlock>
+                    <ScrollView style={styles.contactsList} nestedScrollEnabled>
+                        {new Array(5).fill(undefined).map((contact, index) => (
+                            <SingleParticipantBlock
+                                key={index}
+                                uri={'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg'}
+                                button={{
+                                    label: 'Написать',
+                                    onPress: () => {navigation.navigate('Chat', {currentPage: 'Диалог'})}
+                                }}
+                                style={styles.contactsBlock}
+                            >
+                                <Text style={styles.name}>Иванов Пётр Сергеевич</Text>
+                                <Text style={styles.location}>Россия, Новосибирск</Text>
+                                <View style={styles.contacts}>
+                                    <Text style={styles.contactsText}>+7 913 320 0001</Text>
+                                    <ImageCallGreen />
+                                </View>
+                                <View style={styles.contacts}>
+                                    <Text style={styles.contactsText}>petrivanov@company.com</Text>
+                                    <ImageEmailGreen />
+                                </View>
+                            </SingleParticipantBlock>
+                        ))}
+                    </ScrollView>
+
 
                     <View style={styles.reviewBlock}>
                         <Text style={styles.header}>Отзывы на участника</Text>
@@ -111,7 +141,7 @@ class SingleParticipant extends React.Component {
                             <MyButton
                                 textStyle={styles.buttonText}
                                 style={styles.button}
-                                onPress={this.moreReviews}
+                                onPress={() => this.moreReviews('from')}
                             >
                                 Ещё отзывы
                             </MyButton>
@@ -137,14 +167,24 @@ class SingleParticipant extends React.Component {
                         <MyButton
                             textStyle={styles.buttonText}
                             style={styles.button}
-                            onPress={this.moreReviews}
+                            onPress={() => this.moreReviews('to')}
                         >
                             Ещё отзывы
                         </MyButton>
                     </View>
                 </View>
-
-
+                <LeaveReviewModal
+                    value={reviewText}
+                    onChangeText={val => this.setState({reviewText: val})}
+                    isVisible={showReviewModal}
+                    onCancel={() => this.setState({showReviewModal: false})}
+                    onSubmit={this.reviewSubmit}
+                />
+                <MoreReviewsModal
+                    isVisible={showMoreReviewsModal}
+                    onCancel={() => this.setState({showMoreReviewsModal: false})}
+                    toOrFrom={toOrFrom}
+                />
             </Wrapper>
         );
     }
@@ -154,6 +194,15 @@ class SingleParticipant extends React.Component {
 const styles = StyleSheet.create({
     wrapper: {
         paddingHorizontal: WRAPPER_PADDINGS
+    },
+    contactsList: {
+        height: 350,
+        marginBottom: 30
+    },
+    contactsBlock: {
+        borderBottomWidth: 1,
+        borderBottomColor: COLOR_6,
+        paddingBottom: 20
     },
     block: {
         marginBottom: 50
@@ -208,7 +257,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 20
+        marginBottom: 20,
+        width: '90%'
     },
     contactsText: {
         fontSize: 12,

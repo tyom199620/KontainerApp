@@ -44,7 +44,7 @@ class HomeFooterButton extends React.Component {
 const styles = StyleSheet.create({
     block: {
         width: '30%',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         height: 100,
     },
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         height: 3,
         borderRadius: 4,
         backgroundColor: COLOR_2,
-        bottom: 14,
+        bottom: 8,
         alignSelf: 'center'
     }
 });

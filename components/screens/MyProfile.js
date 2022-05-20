@@ -1,22 +1,24 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, Image, View} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, Image, View, Animated, Pressable} from "react-native";
 import Wrapper from "../helpers/Wrapper";
 import {connect} from "react-redux";
 import {List} from "react-native-paper";
 import AccordionItem from "../includes/AccordionItem";
 import MyInput from "../includes/MyInput";
 import {COLOR_1, COLOR_6, WRAPPER_PADDINGS} from "../helpers/Variables";
-import BlockWithSwitchButton from "../includes/BlockWithSwitchButton";
+import BlockWithSwitchButton from "../includes/BlockWithSwitchButton"
+import QRCode from "react-native-qrcode-generator";
+import QrModal from "../includes/QrModal";
 
 class MyProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            position: '',
-            phoneNumber: '',
-            email: '',
-            city: '',
+            name: 'Сергей Миранчук',
+            position: 'ген директор',
+            phoneNumber: '+789211886526',
+            email: 'example@email.com',
+            city: 'Москва',
 
             showToOthersPhone: false,
             showToOthersEmail: false,
@@ -33,6 +35,8 @@ class MyProfile extends React.Component {
 
             hideProfile: false,
             deleteProfile: false,
+
+            bigQr: false,
         };
     }
 
@@ -40,6 +44,7 @@ class MyProfile extends React.Component {
         this.props.navigation.navigate('Home')
         console.log('saved')
     }
+
 
     render() {
         const {route, navigation} = this.props;
@@ -60,7 +65,8 @@ class MyProfile extends React.Component {
             newMessagesEmail,
             newMessagesPush,
             hideProfile,
-            deleteProfile
+            deleteProfile,
+            bigQr
         } = this.state;
 
         const {currentPage} = route.params;
@@ -185,16 +191,41 @@ class MyProfile extends React.Component {
                         childrenStyle={styles.block}
                     >
                         <View style={styles.imageBlock}>
-                            <View style={styles.imageView}>
-                                <Image
-                                    source={{uri: 'https://thumbs.dreamstime.com/b/light-gray-beton-background-loft-design-empty-pure-wallpaper-light-gray-beton-background-loft-design-empty-pure-wallpaper-copy-174515451.jpg'}}
-                                    style={styles.imageQr}
+                            <TouchableOpacity
+                                onPress={() => this.setState({bigQr: true})}
+                                style={[styles.imageView, styles.qrView]}
+                            >
+                                <QRCode
+                                    value={JSON.stringify({
+                                        name,
+                                        position,
+                                        phoneNumber,
+                                        email,
+                                        companyName: 'asd',
+                                        photo: 'some_url'
+                                    })}
+                                    size={94}
+                                    bgColor='black'
+                                    fgColor='white'
                                 />
-                            </View>
+                            </TouchableOpacity>
                             <TouchableOpacity>
                                 <Text style={styles.smallButton}>Отправить визитку</Text>
                             </TouchableOpacity>
                         </View>
+                        <QrModal
+                            onCancel={() => this.setState({bigQr: false})}
+                            value={JSON.stringify({
+                                name,
+                                position,
+                                phoneNumber,
+                                email,
+                                city,
+                                companyName: 'asd',
+                                photo: 'some_url'
+                            })}
+                            isVisible={bigQr}
+                        />
                     </AccordionItem>
 
                     <AccordionItem
@@ -320,15 +351,15 @@ const styles = StyleSheet.create({
         height: 100,
         marginRight: 40,
     },
+    qrView: {
+        padding: 3,
+        backgroundColor: '#000',
+        borderRadius: 10
+    },
     image: {
         width: '100%',
         height: '100%',
         borderRadius: 50
-    },
-    imageQr: {
-        width: '100%',
-        height: '100%',
-        borderRadius: 10
     },
     smallButton: {
         color: COLOR_1,

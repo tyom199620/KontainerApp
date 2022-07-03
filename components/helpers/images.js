@@ -64,4 +64,8 @@ export {default as ImageAttach} from '../../assets/images/attach.svg';
 export {default as ImageLikeSmall} from '../../assets/images/likeSmall.svg';
 export {default as ImageLikeSmallBlue} from '../../assets/images/likeSmallBlue.svg';
 export {default as ImageReply} from '../../assets/images/reply.svg';
-export {default as ImageDelete} from '../../assets/images/delete.svg';
+export {default as ImageDelete} from '../../assets/images/delete.svg'
+
+export {default as ImageModalClose} from '../../assets/images/modal_cross.svg';
+export {default as ImageStar} from '../../assets/images/rating_big.svg';
+export {default as ImageStarBlue} from '../../assets/images/rating_big_blue.svg';

@@ -19,6 +19,7 @@ class RegistrationModal extends React.Component {
                 backdropOpacity={0}
                 animationInTiming={100}
                 animationOutTiming={100}
+                useNativeDriver
             >
                 <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
                     <View style={styles.modalWrapper}>

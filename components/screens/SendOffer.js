@@ -45,6 +45,16 @@ class SendOffer extends React.Component {
                             </View>
                             <Text style={styles.dateAdded}>9.04.2022</Text>
                         </View>
+                        <View style={styles.containerPhotoBlock}>
+                            {Math.random() > 0.0 && (
+                                new Array(6).fill(null).map((el, i) => (
+                                    <View key={i} style={styles.containerPhotoView}>
+                                        <Image style={styles.containerPhoto} source={{uri: 'https://thumbs.dreamstime.com/b/light-gray-beton-background-loft-design-empty-pure-wallpaper-light-gray-beton-background-loft-design-empty-pure-wallpaper-copy-174515451.jpg'}} />
+                                    </View>
+                                ))
+                            )}
+                        </View>
+
                     </View>
                     <View style={styles.company}>
                         <Image style={styles.companyPhoto} source={{uri: 'https://thumbs.dreamstime.com/b/light-gray-beton-background-loft-design-empty-pure-wallpaper-light-gray-beton-background-loft-design-empty-pure-wallpaper-copy-174515451.jpg'}} />
@@ -130,6 +140,23 @@ const styles = StyleSheet.create({
         paddingVertical: 30,
         borderBottomWidth: 1,
         borderBottomColor: COLOR_6
+    },
+    containerPhotoBlock: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    containerPhotoView: {
+        padding: 4,
+        borderWidth: 1,
+        borderColor: COLOR_2,
+        marginBottom: 10,
+        marginRight: 10,
+        width: '22%',
+        height: 74
+    },
+    containerPhoto: {
+        width: '100%',
+        height: '100%',
     },
     row: {
         flexDirection: 'row',

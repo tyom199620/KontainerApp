@@ -11,6 +11,7 @@ function* login(action) {
         const {email, password} = action.payload
         const { data } = yield call(Api.login, email, password);
 
+        console.log(data)
         yield put({
             type: LOGIN_SUCCESS,
             payload: {

@@ -10,6 +10,7 @@ import {ImageDelete, ImageFadePart,} from "../helpers/images";
 import Search from "../includes/Search";
 import AddNew from "../includes/AddNew";
 import ScrollableAccordionItem from "../includes/ScrollableAccordionItem";
+import NewDialogModal from "../includes/NewDialogModal";
 
 class Messages extends React.Component {
     constructor(props) {
@@ -18,7 +19,10 @@ class Messages extends React.Component {
             tabs: ['Диалоги', 'Чаты'],
             activeTab: 'Диалоги',
             searchValue: '',
-            expandedList: []
+            expandedList: [],
+            showNewDialogModal: false,
+            companyName: '',
+            userName: '',
         };
     }
 
@@ -64,7 +68,7 @@ class Messages extends React.Component {
     render() {
         const {route, navigation} = this.props;
         const {currentPage} = route.params;
-        const {expandedList} = this.state;
+        const {expandedList, showNewDialogModal, companyName, userName} = this.state;
 
         return (
             <Wrapper withContainer withoutScrollView header={{
@@ -120,8 +124,17 @@ class Messages extends React.Component {
                         <Image source={ImageFadePart} style={styles.fade}/>
                     </View>
 
-                    <AddNew onPress={() => {}} />
+                    <AddNew onPress={() => this.setState({showNewDialogModal: true})} />
 
+                    <NewDialogModal
+                        onSubmit={() => this.setState({showNewDialogModal: false, companyName: '', userName: ''})}
+                        onCancel={() => this.setState({showNewDialogModal: false})}
+                        isVisible={showNewDialogModal}
+                        companyName={companyName}
+                        setCompanyName={val => this.setState({companyName: val})}
+                        userName={userName}
+                        setUserName={val => this.setState({userName: val})}
+                    />
                 </View>
             </Wrapper>
         );

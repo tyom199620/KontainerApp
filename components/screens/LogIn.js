@@ -7,7 +7,6 @@ import MyButton from "../includes/MyButton";
 import RegistrationModal from "../includes/RegistrationModal";
 import {connect} from "react-redux";
 import {loginRequest} from "../../store/actions/users";
-import {ImageLogo} from "../helpers/images";
 import ForgotPasswordModal from "../includes/ForgotPasswordModal";
 
 class Login extends React.Component {
@@ -72,7 +71,6 @@ class Login extends React.Component {
             <Wrapper withImage withPaddings>
                 <View style={styles.block}>
                     <View style={styles.logoView}>
-                        <ImageLogo style={styles.logo} />
                     </View>
                     <MyInput
                         label={'Логин'}

@@ -21,6 +21,7 @@ class ForgotPasswordModal extends Component {
                 backdropOpacity={0.3}
                 animationInTiming={100}
                 animationOutTiming={100}
+                useNativeDriver
             >
                 <View style={styles.wrapper}>
                     <Text style={styles.title}>Для восстановления пароля укажите свою эл.почту</Text>

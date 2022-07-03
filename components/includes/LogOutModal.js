@@ -20,6 +20,7 @@ class LogOutModal extends Component {
                 backdropOpacity={0.3}
                 animationInTiming={100}
                 animationOutTiming={100}
+                useNativeDriver
             >
                 <View style={styles.wrapper}>
                     <Text style={styles.title}>Вы уверены, что хотите выйти из Приложения?</Text>

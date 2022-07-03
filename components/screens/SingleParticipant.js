@@ -16,7 +16,7 @@ import MyButton from "../includes/MyButton";
 import ReviewItem from "../includes/ReviewItem";
 import LeaveReviewModal from "../includes/LeaveReviewModal";
 import { showMessage } from "react-native-flash-message";
-import MoreReviewsModal from "../includes/MoreReviewsModal";
+import MoreReviews from "./MoreReviews";
 
 class SingleParticipant extends React.Component {
     constructor(props) {
@@ -25,13 +25,18 @@ class SingleParticipant extends React.Component {
             reviewText: '',
             showReviewModal: false,
 
-            showMoreReviewsModal: false,
-            toOrFrom: ''
+            toOrFrom: '',
+
+            rating: 0
         };
     }
 
     leaveReview = () => {
         this.setState({showReviewModal: true})
+    }
+
+    setRating = rating => {
+        this.setState({rating})
     }
 
     reviewSubmit = () => {
@@ -42,14 +47,16 @@ class SingleParticipant extends React.Component {
         this.setState({showReviewModal: false, reviewText: ''})
     }
 
-    moreReviews = (toOrFrom) => {
-        this.setState({showMoreReviewsModal: true, toOrFrom})
+    moreReviews = toOrFrom => {
+        const {navigation} = this.props;
+
+        navigation.navigate('MoreReviews', {currentPage: `Отзывы ${toOrFrom === 'from' ? 'на ' : ''}участника`})
     }
 
     render() {
         const {route, navigation} = this.props;
         const {currentPage} = route.params;
-        const {reviewText, showReviewModal, toOrFrom, showMoreReviewsModal} = this.state;
+        const {reviewText, showReviewModal, toOrFrom, rating} = this.state;
         return (
             <Wrapper withContainer header={{
                 currentPage,
@@ -179,11 +186,8 @@ class SingleParticipant extends React.Component {
                     isVisible={showReviewModal}
                     onCancel={() => this.setState({showReviewModal: false})}
                     onSubmit={this.reviewSubmit}
-                />
-                <MoreReviewsModal
-                    isVisible={showMoreReviewsModal}
-                    onCancel={() => this.setState({showMoreReviewsModal: false})}
-                    toOrFrom={toOrFrom}
+                    rating={rating}
+                    setRating={this.setRating}
                 />
             </Wrapper>
         );

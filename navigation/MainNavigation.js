@@ -16,6 +16,7 @@ import CreatingApplication from "../components/screens/CreatingApplication";
 import EditApplication from "../components/screens/EditApplication";
 import Chat from "../components/screens/Chat";
 import TermsOfAgreement from "../components/screens/TermsOfAgreement";
+import MoreReviews from "../components/screens/MoreReviews";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,7 @@ class MainNavigation extends React.Component {
                     <Stack.Screen name="EditApplication" component={EditApplication}/>
                     <Stack.Screen name="Chat" component={Chat}/>
                     <Stack.Screen name="TermsOfAgreement" component={TermsOfAgreement}/>
+                    <Stack.Screen name="MoreReviews" component={MoreReviews}/>
                 </Stack.Navigator>
             </NavigationContainer>
         )
